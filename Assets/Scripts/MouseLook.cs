@@ -7,7 +7,7 @@ public class MouseLook : MonoBehaviour
 {
     public PhotonView photonView;
 
-    public float mouseSensibility = 100;
+    public float mouseSensibility = 50;
     public Transform playerBody;
 
     private float xRotation;

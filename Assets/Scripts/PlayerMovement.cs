@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public PhotonView photonView;
+    public float speed = 0.15f;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        Vector3 move = transform.right * (x * speed) + transform.forward *( z * speed);
 
         controller.Move(move);
     }
