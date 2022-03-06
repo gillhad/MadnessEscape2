@@ -623,6 +623,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cama
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010752173134, guid: 4e1c167b21f56c14ea480ec452fb7552, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 4000011053520396, guid: 4e1c167b21f56c14ea480ec452fb7552, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -685,8 +689,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2911766, y: 1, z: 2.8241663}
-  m_Center: {x: -0.47186005, y: 0, z: -0.12351203}
+  m_Size: {x: 2.2911766, y: 2.3275416, z: 2.8241663}
+  m_Center: {x: -0.47186005, y: 0.66377115, z: -0.12351203}
 --- !u!1 &979463149
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +936,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArmarioAlto1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000010134912364, guid: 695ecdf518d8bd54a94538eefe63665f, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012566455666, guid: 695ecdf518d8bd54a94538eefe63665f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -991,11 +999,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1456764641}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5914445, y: 3.3762946, z: 1}
-  m_Center: {x: 0.29572225, y: 1.1881473, z: 0}
+  m_Size: {x: 1.5068989, y: 3.3762946, z: 2.338606}
+  m_Center: {x: -0.06146002, y: 1.1881473, z: 0.6693033}
 --- !u!1 &1580158967
 GameObject:
   m_ObjectHideFlags: 0
