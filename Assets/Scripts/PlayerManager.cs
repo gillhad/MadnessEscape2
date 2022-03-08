@@ -38,6 +38,8 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.tag == "Interactable") {
             Debug.Log("has tocado el objeto");
             interactableText.gameObject.SetActive(true);
+            interactableText.enabled = true;
+
             interactableText.text = "sdfsfd";
             WaitFor2Sec();
             interactableText.gameObject.SetActive(false);
