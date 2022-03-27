@@ -38,7 +38,6 @@ public class NetWorkingManager : MonoBehaviourPunCallbacks
 
     private void MakeRoom() {
         int randomRoomName = Random.Range(0, 5000);
-        string prueba = "prueba";
         RoomOptions roomOptions = new RoomOptions()
         {
             IsVisible = true,

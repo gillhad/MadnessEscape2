@@ -25,7 +25,6 @@ public class PlayerManager : MonoBehaviour
         }
         
         
-        
     }
 
     public void CameraShake() {
