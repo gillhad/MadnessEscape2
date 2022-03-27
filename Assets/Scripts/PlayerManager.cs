@@ -10,6 +10,14 @@ public class PlayerManager : MonoBehaviour
     public PhotonView photonView;
     public GameObject playerCamera;
     public TextMeshProUGUI interactableText;
+    public GameObject playerCanvas;
+    public GameObject playerLockMenu;
+
+    //botones canvas lock
+    public Button lock1;
+    public Button lock2;
+    public Button lock3;
+    public Button lock4;
     void Start()
     {
         
@@ -34,23 +42,42 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Interactable") {
-            Debug.Log("has tocado el objeto");
-            interactableText.gameObject.SetActive(true);
-            interactableText.enabled = true;
+            if (other.gameObject.name == "ArmarioInteractua")
+            {
+                Debug.Log("has tocado el objeto");
+                interactableText.gameObject.SetActive(true);
+                interactableText.text = "PALOMITAS";
+                Debug.Log("aquí debería estar activo");
 
-            interactableText.text = "sdfsfd";
-            WaitFor2Sec();
-            interactableText.gameObject.SetActive(false);
+                StartCoroutine(WaitFor2Sec(playerCanvas));
+            } else if (other.gameObject.name == "BookLock") {
+            playerLockMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0;
+            }
+        
+        
 
-        }
+
     }
 
-    IEnumerator WaitFor2Sec() {
-        yield return new WaitForSeconds(3);
+   /*
+    * Deshabilita el canvas que le pases tras 5 segundos
+    * 
+    * @param gameObject -> canvas
+    */
+    IEnumerator WaitFor2Sec(GameObject gameObject) {
+        yield return new WaitForSeconds(5);
+        gameObject.SetActive(false);
 
 
     }
+
+    /*
+     * Configuracion botones para lock
+     * 
+     */
+    
 }
 
 
