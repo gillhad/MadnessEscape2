@@ -9,21 +9,22 @@ public class PlayerManager : MonoBehaviour
 {
     public PhotonView photonView;
     public GameObject playerCamera;
+    GameManager gameManager;
+    
+    //UI
     public TextMeshProUGUI interactableText;
-    public GameObject playerCanvas;
-    public GameObject playerLockMenu;
-
-    //botones canvas lock
+        ///botones canvas lock
     public Button lock1;
     public Button lock2;
     public Button lock3;
     public Button lock4;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    //GameObjects
+    public GameObject playerCanvas;
+    public GameObject playerLockMenu;
+
+
+
     void Update()
     {
         if (PhotonNetwork.InRoom && !photonView.IsMine)
@@ -35,25 +36,29 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    //prueba para mover la cámara cuando pase algo **pendiente de revisar**
     public void CameraShake() {
         playerCamera.transform.localRotation = Quaternion.Euler(Random.Range(-2f, 2f),0,0);
 
     }
 
+
+
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.name == "ArmarioInteractua")
-            {
-                Debug.Log("has tocado el objeto");
-                interactableText.gameObject.SetActive(true);
-                interactableText.text = "PALOMITAS";
-                Debug.Log("aquí debería estar activo");
 
-                StartCoroutine(WaitFor2Sec(playerCanvas));
-            } else if (other.gameObject.name == "BookLock") {
+        //Ejemplo de collider
+            if (other.gameObject.name == "ArmarioInteractua") //nombre del objeto con el que interactuamos
+            {
+                interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
+                interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
+                
+                StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
+            }
+        
+            if (other.gameObject.name == "BookLock") {
             playerLockMenu.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
-            Time.timeScale = 0;
+            gameManager.OnPause();
             }
         
         
@@ -73,10 +78,6 @@ public class PlayerManager : MonoBehaviour
 
     }
 
-    /*
-     * Configuracion botones para lock
-     * 
-     */
     
 }
 
