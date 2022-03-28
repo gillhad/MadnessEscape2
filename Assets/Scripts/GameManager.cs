@@ -36,7 +36,10 @@ public class GameManager : MonoBehaviour
             if (isShowing)
             {
                 Cursor.lockState = CursorLockMode.None;
-                Debug.Log("incentario");
+                Time.timeScale = 0;
+            }else
+            {
+                Time.timeScale = 1;
             }
         }
     }
