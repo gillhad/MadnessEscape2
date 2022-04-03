@@ -33,7 +33,10 @@ public class GameManager : MonoBehaviour
     //Variables
     private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
 
-
+    private void Start()
+    {
+        
+    }
     private void Update()
     {
         if (!PhotonNetwork.InRoom || PhotonNetwork.IsMasterClient && photonView.IsMine) { 
@@ -61,6 +64,10 @@ public class GameManager : MonoBehaviour
         {
             checkBookLockResult();
         }
+
+
+
+
     }
 
     /*
@@ -134,4 +141,14 @@ public class GameManager : MonoBehaviour
         thisText.text = "";
 
     }
+
+    public void OpenDoor(GameObject door) {
+        
+        }
+
+    public void PrintText() {
+
+        Debug.Log("texto");
+    }
+
 }

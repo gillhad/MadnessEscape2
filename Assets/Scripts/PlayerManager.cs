@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 {
     public PhotonView photonView;
     public GameObject playerCamera;
-    GameManager gameManager;
+    public GameManager gameManager;
     
     //UI
     public TextMeshProUGUI interactableText;
@@ -60,6 +60,12 @@ public class PlayerManager : MonoBehaviour
             playerLockMenu.SetActive(true);
             gameManager.OnPause();
             }
+
+        if (other.gameObject.tag == "Door") {
+            Debug.Log("tocando puerta");
+            GameObject door = other.gameObject; 
+            gameManager.OpenDoor(door);
+        }
         
         
 

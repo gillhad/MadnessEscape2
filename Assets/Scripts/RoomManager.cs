@@ -38,7 +38,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         Vector3 spawnPosition1 = new Vector3(4f, 2f, 4f);
-        Vector3 spawnPosition2 = new Vector3(30f, 2f, 30f);
+        Vector3 spawnPosition2 = new Vector3(10f, 2f, 30f);
 
         if (PhotonNetwork.InRoom)
         {
