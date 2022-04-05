@@ -25,10 +25,15 @@ public class GameManager : MonoBehaviour
     public GameObject playerLockCanvas;
     public GameObject inventory;
 
-    private InventoryManager inventoryManager;
-
+    //Inventory Manager
+    public InventoryManager inventoryManager;
+    
     //bool
     private bool isShowingInventory = false;
+    //variable para decirle al juego si debe hacer check de cuantos cubos tenemos en inventario
+    private bool checkBuckets = true;
+
+    public static bool door1CanBeOpened {get; set;} = false;
 
     //Variables
     private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
@@ -43,7 +48,7 @@ public class GameManager : MonoBehaviour
 
         }
 
-        //Abre el men˙ al pulsar "I"
+        //Abre el menÔøΩ al pulsar "I"
         if (Input.GetKeyDown(KeyCode.I))
         {
             isShowingInventory = !isShowingInventory;
@@ -59,20 +64,20 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        //Si est· el men˙ de candado abierto revisa si se cumple el puzzle
+        //Si estÔøΩ el menÔøΩ de candado abierto revisa si se cumple el puzzle
         if (playerLockCanvas.active)
         {
             checkBookLockResult();
         }
 
-
-
+        //si la variable de check cubos en el inventario es true llamaremos a la funcion
+        if(checkBuckets) checkBucketsInInventory();
 
     }
 
     /*
-     * Cambia los n˙meros del candado 0-9 
-     * @params le pasa el par·metro de texto del botÛn para que lo lea y modifique
+     * Cambia los nÔøΩmeros del candado 0-9 
+     * @params le pasa el parÔøΩmetro de texto del botÔøΩn para que lo lea y modifique
      *  
      */
     
@@ -95,14 +100,14 @@ public class GameManager : MonoBehaviour
     }
 
 
-    //reinicia los comandos rotaciÛn y movimiento del jugador
+    //reinicia los comandos rotaciÔøΩn y movimiento del jugador
     public void OnResume() {
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
     }
 
 
-    //Pausa los comandos de rotaciÛn y movimiento del jugador
+    //Pausa los comandos de rotaciÔøΩn y movimiento del jugador
     public void OnPause()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -150,5 +155,24 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("texto");
     }
+
+    //Funcion para checkear el numero de cubos en el inventario
+    private void checkBucketsInInventory(){
+        int bucketInInventory = 0;
+        //Recorremos el inventario
+        inventoryManager.Items.ForEach(item => {
+            if(item.itemName.Equals("Bucket")) bucketInInventory++;
+        });
+
+        //si tenemos 3 cubos, ponemos el checkBuckets a true para que no se vuelva a ejecutar la funcion
+        //y ahorrar capacidad de proceso, y tambi√©n ponemos a true la variable estatica door1CanBeOpened
+        if(bucketInInventory == 3){
+            checkBuckets = false;
+            door1CanBeOpened = true;
+        }
+
+
+    }
+
 
 }

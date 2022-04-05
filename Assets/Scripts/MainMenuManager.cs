@@ -7,7 +7,7 @@ public class MainMenuManager : MonoBehaviour
 {
     public void StartGame() {
         Debug.Log("iniciar");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(220);
     }
 
     public int target = 30;
