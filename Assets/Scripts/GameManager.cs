@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Realtime;
 using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
+using ExitGames.Client.Photon;
 
 
 public class GameManager : MonoBehaviour
@@ -170,9 +172,5 @@ public class GameManager : MonoBehaviour
             checkBuckets = false;
             door1CanBeOpened = true;
         }
-
-
     }
-
-
 }
