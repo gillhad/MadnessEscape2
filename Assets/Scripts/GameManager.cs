@@ -6,13 +6,14 @@ using Photon.Pun;
 using UnityEngine.UI;
 using TMPro;
 using ExitGames.Client.Photon;
+using System.Linq;
 
 
 public class GameManager : MonoBehaviour
 {
 
     //basics
-    public GameManager gameManager;
+    public static GameManager instance;
     public PhotonView photonView;
 
     //UI
@@ -29,26 +30,24 @@ public class GameManager : MonoBehaviour
 
     //Inventory Manager
     public InventoryManager inventoryManager;
+
     
     //bool
     private bool isShowingInventory = false;
     //variable para decirle al juego si debe hacer check de cuantos cubos tenemos en inventario
     private bool checkBuckets = true;
 
+    private bool checkKey1 = true;
+
     public static bool door1CanBeOpened {get; set;} = false;
+    public static bool door2CanBeOpened {get; set;} = false;
+    public static bool lock1CanBeSeen {get; set;} = false;
 
     //Variables
     private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
-
-    private void Start()
-    {
         
-    }
     private void Update()
     {
-        if (!PhotonNetwork.InRoom || PhotonNetwork.IsMasterClient && photonView.IsMine) { 
-
-        }
 
         //Abre el men� al pulsar "I"
         if (Input.GetKeyDown(KeyCode.I))
@@ -63,6 +62,7 @@ public class GameManager : MonoBehaviour
             }else
             {
                 Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
             }
         }
 
@@ -74,6 +74,12 @@ public class GameManager : MonoBehaviour
 
         //si la variable de check cubos en el inventario es true llamaremos a la funcion
         if(checkBuckets) checkBucketsInInventory();
+
+        if(inventoryManager.Items.Where(x => x.itemName.Equals("Key1")).ToList<Item>().Count() == 1 && checkKey1)
+        {
+            checkKey1 = false;
+            lock1CanBeSeen = true;
+        }
 
     }
 
@@ -173,4 +179,5 @@ public class GameManager : MonoBehaviour
             door1CanBeOpened = true;
         }
     }
+
 }

@@ -22,21 +22,21 @@ public class PlayerManager : MonoBehaviour
     //GameObjects
     public GameObject playerCanvas;
     public GameObject playerLockMenu;
-
-
+    public GameObject primeraPista;
 
     void Update()
     {
+        
         if (PhotonNetwork.InRoom && !photonView.IsMine)
         {
             playerCamera.gameObject.SetActive(false);
             return;
         }
-        
+        Debug.Log(photonView.IsMine);
         
     }
 
-    //prueba para mover la cámara cuando pase algo **pendiente de revisar**
+    //prueba para mover la cï¿½mara cuando pase algo **pendiente de revisar**
     public void CameraShake() {
         playerCamera.transform.localRotation = Quaternion.Euler(Random.Range(-2f, 2f),0,0);
 
@@ -48,7 +48,7 @@ public class PlayerManager : MonoBehaviour
     {
 
         //Ejemplo de collider
-            if (other.gameObject.name == "ArmarioInteractua") //nombre del objeto con el que interactuamos
+            if (other.gameObject.name == "ArmarioInteractua" && photonView.IsMine) //nombre del objeto con el que interactuamos
             {
                 interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
                 interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
@@ -56,9 +56,8 @@ public class PlayerManager : MonoBehaviour
                 StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
             }
         
-            if (other.gameObject.name == "BookLock") {
-            playerLockMenu.SetActive(true);
-            gameManager.OnPause();
+            if (other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen) {
+                playerLockMenu.SetActive(true);
             }
 
         if (other.gameObject.tag == "Door") {
@@ -66,9 +65,20 @@ public class PlayerManager : MonoBehaviour
             GameObject door = other.gameObject; 
             gameManager.OpenDoor(door);
         }
-        
-        
 
+        if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
+            primeraPista.SetActive(true);
+        }
+        
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
+            primeraPista.SetActive(false);
+        }
+        if(other.gameObject.name == "BookLock" && photonView.IsMine){
+            playerLockMenu.SetActive(false);
+        }
 
     }
 
