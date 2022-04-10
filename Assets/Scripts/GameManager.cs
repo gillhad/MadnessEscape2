@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
     private bool checkBuckets = true;
 
     private bool checkKey1 = true;
+    private bool checkMorningStar = true;
 
     public static bool door1CanBeOpened {get; set;} = false;
     public static bool door2CanBeOpened {get; set;} = false;
     public static bool lock1CanBeSeen {get; set;} = false;
+    public static bool playerHasMorningStar {get; set;} = false;
 
     //Variables
     private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
@@ -75,10 +77,20 @@ public class GameManager : MonoBehaviour
         //si la variable de check cubos en el inventario es true llamaremos a la funcion
         if(checkBuckets) checkBucketsInInventory();
 
-        if(inventoryManager.Items.Where(x => x.itemName.Equals("Key1")).ToList<Item>().Count() == 1 && checkKey1)
+
+        //Check para saber si el jugador tiene una llave en su inventario
+        if(checkKey1 && inventoryManager.Items.Where(x => x.itemName.Equals("Key1")).ToList<Item>().Count() == 1)
         {
             checkKey1 = false;
             lock1CanBeSeen = true;
+        }
+
+        //Check para saber si un jugador tiene el martillo en su inventario
+        if(checkMorningStar && inventoryManager.Items.Where(x => x.itemName.Equals("MorningStar")).ToList<Item>().Count() == 1)
+        {
+            Debug.Log("tengo el martillo");
+            checkMorningStar = false;
+            playerHasMorningStar = true;
         }
 
     }

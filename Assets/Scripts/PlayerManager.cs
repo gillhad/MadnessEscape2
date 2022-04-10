@@ -32,7 +32,6 @@ public class PlayerManager : MonoBehaviour
             playerCamera.gameObject.SetActive(false);
             return;
         }
-        Debug.Log(photonView.IsMine);
         
     }
 
@@ -66,6 +65,8 @@ public class PlayerManager : MonoBehaviour
             gameManager.OpenDoor(door);
         }
 
+
+        //mostrar el papel de bienvenida al jugador, solo el que lo ha triggereado
         if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
             primeraPista.SetActive(true);
         }
@@ -73,6 +74,7 @@ public class PlayerManager : MonoBehaviour
     }
 
     private void OnTriggerExit(Collider other){
+        //quitar el canvas de papel de bienvenida cuando salga del collider
         if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
             primeraPista.SetActive(false);
         }
