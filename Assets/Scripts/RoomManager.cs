@@ -21,12 +21,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
