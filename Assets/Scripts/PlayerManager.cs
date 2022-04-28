@@ -23,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject playerCanvas;
     public GameObject playerLockMenu;
     public GameObject primeraPista;
+    public GameObject segundaPista;
 
     void Update()
     {
@@ -47,19 +48,19 @@ public class PlayerManager : MonoBehaviour
     {
 
         //Ejemplo de collider
-            if (other.gameObject.name == "ArmarioInteractua" && photonView.IsMine) //nombre del objeto con el que interactuamos
-            {
-                interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
-                interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
+        if(other.gameObject.name == "ArmarioInteractua" && photonView.IsMine) //nombre del objeto con el que interactuamos
+        {
+            interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
+            interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
                 
-                StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
-            }
+            StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
+        }
         
-            if (other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen) {
-                playerLockMenu.SetActive(true);
-            }
+        if(other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen) {
+            playerLockMenu.SetActive(true);
+        }
 
-        if (other.gameObject.tag == "Door") {
+        if(other.gameObject.tag == "Door") {
             Debug.Log("tocando puerta");
             GameObject door = other.gameObject; 
             gameManager.OpenDoor(door);
@@ -69,6 +70,10 @@ public class PlayerManager : MonoBehaviour
         //mostrar el papel de bienvenida al jugador, solo el que lo ha triggereado
         if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
             primeraPista.SetActive(true);
+        }
+
+        if(other.gameObject.name == "Primera Pista" && photonView.IsMine){
+            segundaPista.SetActive(true);
         }
         
     }
@@ -80,6 +85,9 @@ public class PlayerManager : MonoBehaviour
         }
         if(other.gameObject.name == "BookLock" && photonView.IsMine){
             playerLockMenu.SetActive(false);
+        }
+        if(other.gameObject.name == "Primera Pista" && photonView.IsMine){
+            segundaPista.SetActive(false);
         }
 
     }

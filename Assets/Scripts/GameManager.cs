@@ -9,8 +9,9 @@ using ExitGames.Client.Photon;
 using System.Linq;
 
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPun
 {
+    private const byte OPEN_CLOSET_ROOM_1_EVENT = 3;
 
     //basics
     public static GameManager instance;
@@ -27,6 +28,12 @@ public class GameManager : MonoBehaviour
     public GameObject playerCanvas;
     public GameObject playerLockCanvas;
     public GameObject inventory;
+    public GameObject morningStarPrefab;
+
+    private GameObject lever1;
+    private GameObject lever2;
+    private GameObject lever3;
+    private GameObject lever4;
 
     //Inventory Manager
     public InventoryManager inventoryManager;
@@ -40,14 +47,29 @@ public class GameManager : MonoBehaviour
     private bool checkKey1 = true;
     private bool checkMorningStar = true;
 
+    private bool checkLever = true;
+
     public static bool door1CanBeOpened {get; set;} = false;
     public static bool door2CanBeOpened {get; set;} = false;
     public static bool lock1CanBeSeen {get; set;} = false;
     public static bool playerHasMorningStar {get; set;} = false;
 
+    private bool lever1up;
+    private bool lever2up;
+    private bool lever3up;
+    private bool lever4up;
+
     //Variables
     private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
-        
+    
+    private void Start()
+    {
+        lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
+        lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
+        lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
+        lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+
+    }
     private void Update()
     {
 
@@ -66,6 +88,20 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
                 Cursor.lockState = CursorLockMode.Locked;
             }
+        }
+        //checks para las palancas
+        lever1up = lever1.transform.localRotation.eulerAngles.x > 150;
+        lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
+        lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
+        lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+        //se comprobara siempre que se tenga que comprobar el estado de las palancas
+        if(checkLever){
+            if(lever1up && !lever2up && !lever3up && lever4up)
+                {
+                    //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
+                    OpenClosetDoor();
+                    checkLever = false;
+                }
         }
 
         //Si est� el men� de candado abierto revisa si se cumple el puzzle
@@ -192,4 +228,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //Enviar evento por red a todos los jugadores de la sala, para abrir la puerta del armario
+    private void OpenClosetDoor()
+    {
+        RaiseEventOptions options = new RaiseEventOptions()
+        {
+            CachingOption = EventCaching.DoNotCache,
+            Receivers = ReceiverGroup.All
+        };
+        PhotonNetwork.RaiseEvent(OPEN_CLOSET_ROOM_1_EVENT, null, options, SendOptions.SendReliable);
+    }
+
+    private void OnEnable()
+    {
+        PhotonNetwork.NetworkingClient.EventReceived += NetworkingClient_EventReceived;
+    }
+
+    //Quitar listener al deshabilitar el gameObject
+    private void OnDisable(){
+        PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
+    }
+
+    //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
+    private void NetworkingClient_EventReceived(EventData obj){
+        if(obj.Code == OPEN_CLOSET_ROOM_1_EVENT)
+        {
+            if(GameObject.Find("morningStar(Clone)") == null && photonView.IsMine)
+            {
+                Instantiate(morningStarPrefab, new Vector3(7.9f, 0.89f, 0.693f), new Quaternion(-45f, 0f, 0f, 0f)).transform.Rotate(90f, 0f, 0f);
+                morningStarPrefab.name = "morningStar";
+                Debug.Log("hola");
+            }
+        }
+    }
 }
