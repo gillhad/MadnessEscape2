@@ -7,11 +7,10 @@ using UnityEngine.UI;
 using TMPro;
 using ExitGames.Client.Photon;
 using System.Linq;
-
+using MadnessEscape2.Assets.Scripts;
 
 public class GameManager : MonoBehaviourPun
 {
-    private const byte OPEN_CLOSET_ROOM_1_EVENT = 3;
 
     //basics
     public static GameManager instance;
@@ -29,6 +28,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject playerLockCanvas;
     public GameObject inventory;
     public GameObject morningStarPrefab;
+    public GameObject terceraPista;
 
     private GameObject lever1;
     private GameObject lever2;
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviourPun
     private bool lever4up;
 
     //Variables
-    private int[] bookLockValue = { 1, 2, 3, 4 }; //array para probar el candado
+    private int[] bookLockValue = { 5, 4, 2, 7 }; //array para probar el candado
     
     private void Start()
     {
@@ -236,7 +236,7 @@ public class GameManager : MonoBehaviourPun
             CachingOption = EventCaching.DoNotCache,
             Receivers = ReceiverGroup.All
         };
-        PhotonNetwork.RaiseEvent(OPEN_CLOSET_ROOM_1_EVENT, null, options, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte)Events.OPEN_CLOSET_ROOM_1_EVENT, null, options, SendOptions.SendReliable);
     }
 
     private void OnEnable()
@@ -251,13 +251,15 @@ public class GameManager : MonoBehaviourPun
 
     //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
     private void NetworkingClient_EventReceived(EventData obj){
-        if(obj.Code == OPEN_CLOSET_ROOM_1_EVENT)
+        if(obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
         {
-            if(GameObject.Find("morningStar(Clone)") == null && photonView.IsMine)
+            if(GameObject.Find("morningStar(Clone)") == null && photonView.IsMine && GameObject.Find("MorningStar Variant(Clone)") == null)
             {
                 Instantiate(morningStarPrefab, new Vector3(7.9f, 0.89f, 0.693f), new Quaternion(-45f, 0f, 0f, 0f)).transform.Rotate(90f, 0f, 0f);
                 morningStarPrefab.name = "morningStar";
-                Debug.Log("hola");
+                terceraPista.name = "Tecera Pista";
+                Instantiate(terceraPista);
+                GameObject.Find("Tecera Pista(Clone)").transform.position = new Vector3(0.507f, 1.939f, 25);
             }
         }
     }

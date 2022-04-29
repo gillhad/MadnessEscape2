@@ -4,10 +4,10 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using ExitGames.Client.Photon;
+using MadnessEscape2.Assets.Scripts;
 public class ClosetDoorScript : MonoBehaviourPun
 {
     public GameObject door;
-    private const byte OPEN_CLOSET_ROOM_1_EVENT = 3;
     
     private void OnEnable()
     {
@@ -21,7 +21,7 @@ public class ClosetDoorScript : MonoBehaviourPun
 
     //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
     private void NetworkingClient_EventReceived(EventData obj){
-        if(obj.Code == OPEN_CLOSET_ROOM_1_EVENT)
+        if(obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
         {
             Destroy(door);
         }

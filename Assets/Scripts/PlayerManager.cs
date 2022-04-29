@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject playerLockMenu;
     public GameObject primeraPista;
     public GameObject segundaPista;
+    public GameObject terceraPista;
 
     void Update()
     {
@@ -57,6 +58,8 @@ public class PlayerManager : MonoBehaviour
         }
         
         if(other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             playerLockMenu.SetActive(true);
         }
 
@@ -68,12 +71,19 @@ public class PlayerManager : MonoBehaviour
 
 
         //mostrar el papel de bienvenida al jugador, solo el que lo ha triggereado
-        if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
+        if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine)
+        {
             primeraPista.SetActive(true);
         }
 
-        if(other.gameObject.name == "Primera Pista" && photonView.IsMine){
+        if(other.gameObject.name == "Primera Pista" && photonView.IsMine)
+        {
             segundaPista.SetActive(true);
+        }
+
+        if(other.gameObject.name == "Tecera Pista(Clone)" && photonView.IsMine)
+        {
+            terceraPista.SetActive(true);
         }
         
     }
@@ -84,10 +94,16 @@ public class PlayerManager : MonoBehaviour
             primeraPista.SetActive(false);
         }
         if(other.gameObject.name == "BookLock" && photonView.IsMine){
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = false;
             playerLockMenu.SetActive(false);
         }
         if(other.gameObject.name == "Primera Pista" && photonView.IsMine){
             segundaPista.SetActive(false);
+        }
+        if(other.gameObject.name == "Tecera Pista(Clone)" && photonView.IsMine)
+        {
+            terceraPista.SetActive(false);
         }
 
     }
