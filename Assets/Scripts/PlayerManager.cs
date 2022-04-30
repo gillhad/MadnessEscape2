@@ -85,27 +85,39 @@ public class PlayerManager : MonoBehaviour
         {
             terceraPista.SetActive(true);
         }
-        
+
+
+        ///SALA 3
+        if (other.gameObject.name == "Papel prueba" && photonView.IsMine)
+        {
+            gameManager.potionCanvas.SetActive(true);
+            gameManager.OnPause();
+        }
+    
+
     }
 
-    private void OnTriggerExit(Collider other){
+    private void OnTriggerExit(Collider other)
+    {
         //quitar el canvas de papel de bienvenida cuando salga del collider
-        if(other.gameObject.name == "Papel Bienvenida" && photonView.IsMine){
+        if (other.gameObject.name == "Papel Bienvenida" && photonView.IsMine)
+        {
             primeraPista.SetActive(false);
         }
-        if(other.gameObject.name == "BookLock" && photonView.IsMine){
+        if (other.gameObject.name == "BookLock" && photonView.IsMine)
+        {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             playerLockMenu.SetActive(false);
         }
-        if(other.gameObject.name == "Primera Pista" && photonView.IsMine){
+        if (other.gameObject.name == "Primera Pista" && photonView.IsMine)
+        {
             segundaPista.SetActive(false);
         }
-        if(other.gameObject.name == "Tecera Pista(Clone)" && photonView.IsMine)
+        if (other.gameObject.name == "Tecera Pista(Clone)" && photonView.IsMine)
         {
             terceraPista.SetActive(false);
         }
-
     }
 
    /*

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviourPun
     //basics
     public static GameManager instance;
     public PhotonView photonView;
+    public SetTargetFrameRate targetFrameRate;
 
     //UI
     public TextMeshProUGUI lock1;
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviourPun
     private GameObject lever2;
     private GameObject lever3;
     private GameObject lever4;
+
+    public GameObject potionCanvas;
 
     //Inventory Manager
     public InventoryManager inventoryManager;
@@ -61,7 +64,18 @@ public class GameManager : MonoBehaviourPun
 
     //Variables
     private int[] bookLockValue = { 5, 4, 2, 7 }; //array para probar el candado
-    
+
+
+    //variables sala3
+    public int ml3 = 0;
+    public int ml5 = 0;
+    public int ml8 = 8;
+        
+
+    private void Awake()
+    {
+    }
+
     private void Start()
     {
         lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
@@ -127,6 +141,10 @@ public class GameManager : MonoBehaviourPun
             Debug.Log("tengo el martillo");
             checkMorningStar = false;
             playerHasMorningStar = true;
+        }
+
+        if (potionCanvas.active) {
+            PuzzleWater();
         }
 
     }
@@ -263,4 +281,18 @@ public class GameManager : MonoBehaviourPun
             }
         }
     }
+
+    void PuzzleWater() {
+
+        
+ 
+        if (ml5!=4 && ml8 == 4) {
+            //puzzle conseguido
+            Debug.Log("conseguido");
+            StartCoroutine(WaitFor2Sec(potionCanvas));
+        }
+    }
+
+
+
 }
