@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     public GameObject segundaPista;
     public GameObject terceraPista;
 
+
+
     void Update()
     {
         
@@ -88,7 +90,7 @@ public class PlayerManager : MonoBehaviour
 
 
         ///SALA 3
-        if (other.gameObject.name == "Papel prueba" && photonView.IsMine)
+        if (other.gameObject.name == "Papel prueba" && photonView.IsMine )
         {
             gameManager.potionCanvas.SetActive(true);
             gameManager.OnPause();

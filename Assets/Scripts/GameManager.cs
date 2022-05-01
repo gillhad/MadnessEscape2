@@ -67,9 +67,10 @@ public class GameManager : MonoBehaviourPun
 
 
     //variables sala3
-    public int ml3 = 0;
-    public int ml5 = 0;
-    public int ml8 = 8;
+    public static int ml3 = 0;
+    public static int ml5 = 0;
+    public static int ml8 = 8;
+    bool potionReceived = false;
         
 
     private void Awake()
@@ -214,16 +215,26 @@ public class GameManager : MonoBehaviourPun
      */
     IEnumerator WaitFor2Sec(GameObject gameObject)
     {
+        Debug.Log("deberia cerrarse");
         yield return new WaitForSeconds(2);
         gameObject.SetActive(false);
-        TextMeshProUGUI thisText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
-        thisText.text = "";
+
+        ///Elimina texto si tiene
+        if (gameObject.GetComponentInChildren<TextMeshProUGUI>() != null)
+        {
+            TextMeshProUGUI thisText = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+            thisText.text = "";
+        }
 
     }
 
     public void OpenDoor(GameObject door) {
         
         }
+
+    public void closeCanvas(GameObject gameObject) {
+        gameObject.SetActive(false);
+    }
 
     public void PrintText() {
 
@@ -286,9 +297,11 @@ public class GameManager : MonoBehaviourPun
 
         
  
-        if (ml5!=4 && ml8 == 4) {
+        if (ml5==4 && ml8 == 4) {
             //puzzle conseguido
             Debug.Log("conseguido");
+            potionReceived = true;
+            OnResume();
             StartCoroutine(WaitFor2Sec(potionCanvas));
         }
     }

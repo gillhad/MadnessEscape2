@@ -25,7 +25,16 @@ public class PotionPuzze : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         rectTransform = transform as RectTransform;
         currentPos = rectTransform.transform.position;
         canvasGroup = GetComponent<CanvasGroup>();
-        Debug.Log(text.text);
+        Debug.Log("cambiar pocion");
+        if (GetComponentInChildren<Text>().text != "0")
+        {
+            Debug.Log("está llena");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/GreenPotion");
+        }
+        else {
+            Debug.Log("Está vacia");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPotion");
+        }
         //currentMl = int.Parse(rectTransform.name);
     }
     public void OnBeginDrag(PointerEventData eventData)
