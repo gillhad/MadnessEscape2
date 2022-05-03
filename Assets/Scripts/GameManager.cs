@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviourPun
 
     public void closeCanvas(GameObject gameObject) {
         gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     public void PrintText() {

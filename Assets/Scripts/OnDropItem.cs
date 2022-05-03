@@ -59,10 +59,6 @@ public class OnDropItem : MonoBehaviour, IDropHandler
                     eventData.pointerDrag.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPotion");
                 }
 
-                Debug.Log("valores de las pociones");
-                Debug.Log(GameManager.ml3);
-                Debug.Log(GameManager.ml5);
-                Debug.Log(GameManager.ml8);
 
                 //Comrpobamos el valor del objeto donde se recibe líquido
                 if (GetComponentInChildren<Text>().name == "3")
