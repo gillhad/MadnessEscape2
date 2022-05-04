@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviourPun
 
 
     //variables sala3
+    public Text valueml3, valueml5, valueml8;
     public static int ml3 = 0;
     public static int ml5 = 0;
     public static int ml8 = 8;
@@ -234,7 +235,7 @@ public class GameManager : MonoBehaviourPun
 
     public void closeCanvas(GameObject gameObject) {
         gameObject.SetActive(false);
-        gameObject.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void PrintText() {
@@ -296,7 +297,9 @@ public class GameManager : MonoBehaviourPun
 
     void PuzzleWater() {
 
-        
+        ml3 = int.Parse(valueml3.text);
+        ml5 = int.Parse(valueml5.text);
+        ml8 = int.Parse(valueml8.text);
  
         if (ml5==4 && ml8 == 4) {
             //puzzle conseguido
@@ -306,6 +309,8 @@ public class GameManager : MonoBehaviourPun
             StartCoroutine(WaitFor2Sec(potionCanvas));
         }
     }
+
+    
 
 
 

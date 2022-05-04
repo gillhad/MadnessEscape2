@@ -95,7 +95,11 @@ public class PlayerManager : MonoBehaviour
             gameManager.potionCanvas.SetActive(true);
             gameManager.OnPause();
         }
-    
+
+        if (other.gameObject.tag == "Interactable" && photonView.IsMine) {
+            Debug.Log("tocas un objecto que interactúa");
+            Cursor.visible = true;
+        }
 
     }
 

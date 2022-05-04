@@ -58,7 +58,6 @@ public class PotionPuzze : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
                 ref velocity, dampingSpeed);
             }
         rectTransform.anchoredPosition += eventData.delta;
-        throw new System.NotImplementedException();
     }
 
     public void OnEndDrag(PointerEventData eventData)
