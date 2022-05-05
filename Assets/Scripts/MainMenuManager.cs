@@ -9,7 +9,8 @@ public class MainMenuManager : MonoBehaviour
     public static MainMenuManager Instance;
     [SerializeField] Menu[] menus;
 
-
+    GameObject button1, button2, button3;
+    SceneManager scene;
 
     void Awake()
     {
@@ -55,6 +56,15 @@ public class MainMenuManager : MonoBehaviour
         menu.Close();
     }
 
+    public void OnLoadTest1() {
+        SceneManager.LoadScene(2);
+    }
+    public void OnLoadTest2() {
+        SceneManager.LoadScene(3);
+    }
+    public void OnLoadTest3() {
+        SceneManager.LoadScene(4);
+    }
 
 
 

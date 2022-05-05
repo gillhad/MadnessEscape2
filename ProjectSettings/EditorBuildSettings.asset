@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameOnline.unity
     guid: 66514128501136242beaec3b951d14a0
+  - enabled: 1
+    path: Assets/Scenes/Baron.unity
+    guid: fd56c9dfa569d044bb2a1db26fa9da65
+  - enabled: 1
+    path: Assets/Scenes/Mihai.unity
+    guid: 499df773dd8de2749ba319ec6bb1e702
+  - enabled: 1
+    path: Assets/Scenes/Cristian.unity
+    guid: d94d6d0f10560ae4f9767cff417273d1
   m_configObjects: {}
