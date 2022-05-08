@@ -26,6 +26,7 @@ public class BookDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void OnDrag(PointerEventData eventData)
     {
         rectTransform.anchoredPosition += eventData.delta;
+        
     }
 
     public void OnEndDrag(PointerEventData eventData)

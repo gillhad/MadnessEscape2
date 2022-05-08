@@ -6,7 +6,8 @@ public class BookManager : MonoBehaviour
 {
     public List<GameObject> books;
     public List<GameObject> huecos;
-    bool solved = false;
+    public bool solved = false;
+    private static GameManager gameManager;
     Vector3 position1;
     Vector3 position2;
     Vector3 position3;
@@ -24,6 +25,14 @@ public class BookManager : MonoBehaviour
         position6 = books[5].transform.position;
     }
 
+    private void Start()
+    {
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
+    }
+
     private void Update()
     {
         if (!solved)
@@ -31,20 +40,22 @@ public class BookManager : MonoBehaviour
             int count = 0;
             for (int i = 0; i < books.Count; i++)
             {
-                if (books[i].transform.position == huecos[i].transform.position)
+                if (books[i].transform.position.x == huecos[i].transform.position.x && books[i].transform.position.y == huecos[i].transform.position.y)
                 {
-                    Debug.Log("está bien colocado");
+                    Debug.Log("libro"+ i +"en hueco");
                     Debug.Log(count);
                     count++;
                 }
                 else
                 {
+
                 };
             }
             if (count == 6)
             {
                 Debug.Log("solved");
                 solved = true;
+                gameManager.bookDrawerPuzzle();
             }
         }
     }

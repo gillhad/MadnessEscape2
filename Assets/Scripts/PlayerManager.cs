@@ -12,7 +12,7 @@ public class PlayerManager : MonoBehaviourPun
 {
     public PhotonView photonView;
     public GameObject playerCamera;
-    public GameManager gameManager;
+    private GameManager gameManager;
     
     //UI
     public TextMeshProUGUI interactableText;
@@ -32,6 +32,8 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasdrawer;
 
 
+    bool drawerSolved = false;
+
 
     RaiseEventOptions options = new RaiseEventOptions()
         {
@@ -39,6 +41,13 @@ public class PlayerManager : MonoBehaviourPun
             Receivers = ReceiverGroup.All
         };
 
+
+    private void Start()
+    {
+        if (gameManager == null) { 
+        gameManager = gameManager = FindObjectOfType<GameManager>();
+        }
+    }
     void Update()
     {
         
@@ -123,12 +132,18 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OnPause();
         }
 
-        if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine) {
+        if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved) {
             Debug.Log("tocas un objecto que interactúa");
-            gameManager.drawCanvas.SetActive(true);
+            gameManager.drawerCanvas.SetActive(true);
             Cursor.visible = true;
             gameManager.OnPause();
             
+        }
+
+        if (other.gameObject.name == "Elementos" && photonView.IsMine) {
+            gameManager.puzzleElementosCanvas.SetActive(true);
+            Cursor.visible = true;
+            gameManager.OnPause();
         }
 
     }

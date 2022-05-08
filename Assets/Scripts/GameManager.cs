@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviourPun
     //basics
     public static GameManager instance;
     public PhotonView photonView;
+    BookManager bookManager;
+    PlayerManager playerManager;
+    [SerializeField] Animator wallAnimationController;
+
     //public SetTargetFrameRate targetFrameRate;
 
     //UI
@@ -30,6 +34,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject inventory;
     public GameObject morningStarPrefab;
     public GameObject terceraPista;
+   
 
     private GameObject lever1;
     private GameObject lever2;
@@ -37,7 +42,10 @@ public class GameManager : MonoBehaviourPun
     private GameObject lever4;
 
     public GameObject potionCanvas;
-    public GameObject drawCanvas;
+    public GameObject drawerCanvas;
+    public GameObject puzzleElementosCanvas;
+
+
 
     //Inventory Manager
     public InventoryManager inventoryManager;
@@ -84,13 +92,16 @@ public class GameManager : MonoBehaviourPun
 
     private void Start()
     {
-        if (GameObject.Find("Lever1").transform.GetChild(1).gameObject != null)
-        {
-            lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
-        }
-        lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
-        lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
-        lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+        
+            
+        
+        
+       
+        
+        //lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;        
+        //lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
+        //lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
+        //lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
 
     }
     private void Update()
@@ -157,6 +168,12 @@ public class GameManager : MonoBehaviourPun
         if (potionCanvas.active) {
             PuzzleWater();
         }
+
+        if (puzzleElementosCanvas.active) {
+            Debug.Log("elementos");
+            puzzleElementos();
+        }
+
 
     }
 
@@ -356,8 +373,21 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    
+    public void bookDrawerPuzzle() {
+            Debug.Log("puzzle solved");
+             OnResume();
+             StartCoroutine(WaitFor2Sec(drawerCanvas));
 
+        //animación de abrir puerta secreta
+        FindObjectOfType<ControllerAnimations>().openWall();
+
+    }
+
+
+    void puzzleElementos() { 
+        
+    
+    }
 
 
 }
