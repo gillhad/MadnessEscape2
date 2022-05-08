@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviourPun
     //basics
     public static GameManager instance;
     public PhotonView photonView;
-    public SetTargetFrameRate targetFrameRate;
+    //public SetTargetFrameRate targetFrameRate;
 
     //UI
     public TextMeshProUGUI lock1;
@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviourPun
     private GameObject lever4;
 
     public GameObject potionCanvas;
+    public GameObject drawCanvas;
 
     //Inventory Manager
     public InventoryManager inventoryManager;
@@ -80,7 +81,10 @@ public class GameManager : MonoBehaviourPun
 
     private void Start()
     {
-        lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
+        if (GameObject.Find("Lever1").transform.GetChild(1).gameObject != null)
+        {
+            lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
+        }
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
@@ -106,10 +110,13 @@ public class GameManager : MonoBehaviourPun
             }
         }
         //checks para las palancas
-        lever1up = lever1.transform.localRotation.eulerAngles.x > 150;
-        lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
-        lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
-        lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+        if (lever1 != null)
+        {
+            lever1up = lever1.transform.localRotation.eulerAngles.x > 150;
+            lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
+            lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
+            lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+        }
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if(checkLever){
             if(lever1up && !lever2up && !lever3up && lever4up)

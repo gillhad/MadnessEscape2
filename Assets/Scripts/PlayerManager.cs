@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject primeraPista;
     public GameObject segundaPista;
     public GameObject terceraPista;
-
+    public GameObject canvasdrawer;
 
 
     void Update()
@@ -96,9 +96,12 @@ public class PlayerManager : MonoBehaviour
             gameManager.OnPause();
         }
 
-        if (other.gameObject.tag == "Interactable" && photonView.IsMine) {
+        if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine) {
             Debug.Log("tocas un objecto que interactúa");
+            gameManager.drawCanvas.SetActive(true);
             Cursor.visible = true;
+            gameManager.OnPause();
+            
         }
 
     }
