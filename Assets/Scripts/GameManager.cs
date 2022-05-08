@@ -62,6 +62,9 @@ public class GameManager : MonoBehaviourPun
     private bool lever2up;
     private bool lever3up;
     private bool lever4up;
+    private bool moveRock1 = false;
+    private bool moveRock2 = false;
+    private bool moveRock3 = false;
 
     //Variables
     private int[] bookLockValue = { 5, 4, 2, 7 }; //array para probar el candado
@@ -147,7 +150,6 @@ public class GameManager : MonoBehaviourPun
         //Check para saber si un jugador tiene el martillo en su inventario
         if(checkMorningStar && inventoryManager.Items.Where(x => x.itemName.Equals("MorningStar")).ToList<Item>().Count() == 1)
         {
-            Debug.Log("tengo el martillo");
             checkMorningStar = false;
             playerHasMorningStar = true;
         }
@@ -300,6 +302,43 @@ public class GameManager : MonoBehaviourPun
                 GameObject.Find("Tecera Pista(Clone)").transform.position = new Vector3(0.507f, 1.939f, 25);
             }
         }
+        if(obj.Code == (uint)Events.ROTATE_ITEM)
+            {
+                float data = (float)obj.CustomData;
+                Debug.Log(data);
+                if(moveRock1)
+                {
+                    GameObject.Find("stone_row_1").transform.Rotate(0, 0, data);
+                }
+                if(moveRock2)
+                {
+                    GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, data);           
+                }
+                if(moveRock3)
+                {
+                    GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, data);
+                }
+            }
+            if(obj.Code == (uint)Events.CAN_ROTATE_STONES)
+            {
+                object[] datas = (object[])obj.CustomData;
+                switch ((int)datas[1])
+                {
+                    case 1:
+                        Debug.Log(moveRock1);
+                        moveRock1 = (bool)datas[0];
+                        break;
+                    case 2:
+                        moveRock2 = (bool)datas[0];
+                        break;
+                    case 3:
+                        moveRock3 = (bool)datas[0];
+                        break;
+                    default:
+                        break;
+
+                }
+            }
     }
 
     void PuzzleWater() {

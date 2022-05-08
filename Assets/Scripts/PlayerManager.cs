@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using MadnessEscape2.Assets.Scripts;
 using TMPro;
+using Photon.Realtime;
+using ExitGames.Client.Photon;
 
-public class PlayerManager : MonoBehaviour
+public class PlayerManager : MonoBehaviourPun
 {
     public PhotonView photonView;
     public GameObject playerCamera;
@@ -25,8 +28,16 @@ public class PlayerManager : MonoBehaviour
     public GameObject primeraPista;
     public GameObject segundaPista;
     public GameObject terceraPista;
+
     public GameObject canvasdrawer;
 
+
+
+    RaiseEventOptions options = new RaiseEventOptions()
+        {
+            CachingOption = EventCaching.DoNotCache,
+            Receivers = ReceiverGroup.All
+        };
 
     void Update()
     {
@@ -87,6 +98,22 @@ public class PlayerManager : MonoBehaviour
         {
             terceraPista.SetActive(true);
         }
+        if(other.gameObject.name == "stone_row_1" && photonView.IsMine)
+        {
+            Debug.Log("entre en 1");
+            object[] data = {true, (int)1};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
+        }
+        if(other.gameObject.name == "stone_row_2" && photonView.IsMine)
+        {
+            object[] data = {true, (int)2};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
+        }
+        if(other.gameObject.name == "stone_row_3" && photonView.IsMine)
+        {
+            object[] data = {true, (int)3};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
+        }
 
 
         ///SALA 3
@@ -126,6 +153,21 @@ public class PlayerManager : MonoBehaviour
         if (other.gameObject.name == "Tecera Pista(Clone)" && photonView.IsMine)
         {
             terceraPista.SetActive(false);
+        }
+        if(other.gameObject.name == "stone_row_1" && photonView.IsMine)
+        {
+            object[] data = {false, (int)1};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
+        }
+        if(other.gameObject.name == "stone_row_2" && photonView.IsMine)
+        {
+            object[] data = {false, (int)2};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
+        }
+        if(other.gameObject.name == "stone_row_3" && photonView.IsMine)
+        {
+            object[] data = {false, (int)3};
+            PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
         }
     }
 
