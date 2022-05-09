@@ -169,10 +169,10 @@ public class GameManager : MonoBehaviourPun
             PuzzleWater();
         }
 
-        if (puzzleElementosCanvas.active) {
+/*        if (puzzleElementosCanvas.active) {
             Debug.Log("elementos");
             puzzleElementos();
-        }
+        }*/
 
 
     }

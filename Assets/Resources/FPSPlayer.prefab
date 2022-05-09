@@ -5900,7 +5900,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photonView: {fileID: 2674430535315472633}
   playerCamera: {fileID: 6154502909806014221}
-  gameManager: {fileID: 5516318534823558350}
   interactableText: {fileID: 1893820973844206629}
   lock1: {fileID: 695105608483187487}
   lock2: {fileID: 6170720956176648668}
@@ -12084,6 +12083,7 @@ MonoBehaviour:
   terceraPista: {fileID: 191959272960110385}
   potionCanvas: {fileID: 3658790551148705499}
   drawerCanvas: {fileID: 3629644530502696358}
+  puzzleElementosCanvas: {fileID: 0}
   inventoryManager: {fileID: 4223357817957833775}
   valueml3: {fileID: 6911799169780371184}
   valueml5: {fileID: 5132061953250250148}
