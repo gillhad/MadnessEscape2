@@ -5908,8 +5908,8 @@ MonoBehaviour:
   playerCanvas: {fileID: 4997227585780489156}
   playerLockMenu: {fileID: 1810889485210539057}
   primeraPista: {fileID: 232747738533983492}
-  segundaPista: {fileID: 0}
-  terceraPista: {fileID: 0}
+  segundaPista: {fileID: 4965890063240402995}
+  terceraPista: {fileID: 191959272960110385}
   canvasdrawer: {fileID: 0}
 --- !u!143 &1862170687710041293
 CharacterController:
@@ -12080,7 +12080,7 @@ MonoBehaviour:
   playerLockCanvas: {fileID: 1810889485210539057}
   inventory: {fileID: 4416769159437277983}
   morningStarPrefab: {fileID: 2862917354015003271, guid: d9d5c39a0fe06b34bac28126202d57d3, type: 3}
-  terceraPista: {fileID: 191959272960110385}
+  terceraPista: {fileID: 7094352897665712207, guid: 6d1056bf0f315df4f945b7ad4f2c7739, type: 3}
   potionCanvas: {fileID: 3658790551148705499}
   drawerCanvas: {fileID: 3629644530502696358}
   puzzleElementosCanvas: {fileID: 0}

@@ -92,16 +92,13 @@ public class GameManager : MonoBehaviourPun
 
     private void Start()
     {
-        
-            
-        
-        
-       
-        
-        //lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;        
-        //lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
-        //lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
-        //lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+        GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
+        GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
+        GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
+        lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;        
+        lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
+        lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
+        lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
 
     }
     private void Update()
@@ -169,7 +166,7 @@ public class GameManager : MonoBehaviourPun
             PuzzleWater();
         }
 
-/*        if (puzzleElementosCanvas.active) {
+        /*if (puzzleElementosCanvas.active) {
             Debug.Log("elementos");
             puzzleElementos();
         }*/
@@ -216,7 +213,7 @@ public class GameManager : MonoBehaviourPun
         Time.timeScale = 0;
     }
 
-    public void checkBookLockResult()
+    public void checkBookLockResult()   
     {
         int book1 = int.Parse(lock1.text);
         int book2 = int.Parse(lock2.text);
@@ -230,6 +227,7 @@ public class GameManager : MonoBehaviourPun
             playerCanvas.SetActive(true);
             interactableText.text = "lo has conseguido!";
             StartCoroutine(WaitFor2Sec(playerCanvas));
+            OpenSecondRoomChest();
         }
     }
 
@@ -285,6 +283,16 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    private void OpenSecondRoomChest()
+    {
+        RaiseEventOptions options = new RaiseEventOptions()
+        {
+            CachingOption = EventCaching.DoNotCache,
+            Receivers = ReceiverGroup.All
+        };
+        PhotonNetwork.RaiseEvent((byte)Events.OPEN_CHEST_ROOM_2, null, options, SendOptions.SendReliable);
+    }
+
     //Enviar evento por red a todos los jugadores de la sala, para abrir la puerta del armario
     private void OpenClosetDoor()
     {
@@ -316,13 +324,12 @@ public class GameManager : MonoBehaviourPun
                 morningStarPrefab.name = "morningStar";
                 terceraPista.name = "Tecera Pista";
                 Instantiate(terceraPista);
-                GameObject.Find("Tecera Pista(Clone)").transform.position = new Vector3(0.507f, 1.939f, 25);
+                GameObject.Find("Tecera Pista(Clone)").transform.position = new Vector3(0.507f, 1.939f, 28);
             }
         }
         if(obj.Code == (uint)Events.ROTATE_ITEM)
             {
                 float data = (float)obj.CustomData;
-                Debug.Log(data);
                 if(moveRock1)
                 {
                     GameObject.Find("stone_row_1").transform.Rotate(0, 0, data);
