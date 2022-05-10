@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviourPun
 
         if(checkPotions)
         {
-            if(!greenPotionCorrectPosition && GameObject.Find("Potion_green").gameObject.transform.position.z > 24.21f && GameObject.Find("Potion_green").gameObject.transform.position.z < 25.762f && GameObject.Find("Potion_green").gameObject.transform.position.x > -13.35f && GameObject.Find("Potion_green").gameObject.transform.position.y < 1f)
+            if(!greenPotionCorrectPosition && GameObject.Find("Potion_green").gameObject.transform.position.z > 24.21f && GameObject.Find("Potion_green").gameObject.transform.position.z < 25.762f && GameObject.Find("Potion_green").gameObject.transform.position.x < 1.5f && GameObject.Find("Potion_green").gameObject.transform.position.x > 0.6f &&GameObject.Find("Potion_green").gameObject.transform.position.y < 1f)
             {
                 greenPotionCorrectPosition = true;
             }
@@ -138,7 +138,6 @@ public class GameManager : MonoBehaviourPun
             }
             if(!bluePotionCorrectPosition && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z < 28.446f && GameObject.Find("Potion_blue").gameObject.transform.position.y < 1f && GameObject.Find("Potion_blue").gameObject.transform.position.x > 11.7f && GameObject.Find("Potion_blue").gameObject.transform.position.x < 13.2f)   
             {
-                Debug.Log("pocion azul ok");
                 bluePotionCorrectPosition = true;
             }
         }
