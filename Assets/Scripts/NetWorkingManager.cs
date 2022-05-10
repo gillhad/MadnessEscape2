@@ -30,8 +30,12 @@ public class NetWorkingManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        Debug.Log("Connecting to Master");
-        PhotonNetwork.ConnectUsingSettings();
+        if (!PhotonNetwork.IsConnected)
+        {
+            Debug.Log("Connecting to Master");
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        
     }
 
     //Una vez estemos conectados al servidor. Hay que entrar en una lobby para poder crear salas
@@ -47,7 +51,7 @@ public class NetWorkingManager : MonoBehaviourPunCallbacks
     {
         MainMenuManager.Instance.OpenMenu("MainMenu");
         Debug.Log("Joined lobby");
-        PhotonNetwork.NickName = "Player " + Random.Range(0, 2).ToString("00");
+        
     }
 
     public void CreateRoom()
