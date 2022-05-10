@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class OnDrag3D : MonoBehaviour
+public class OnDrag3D : MonoBehaviourPun
    // ,IBeginDragHandler, IEndDragHandler, IDragHandler
 {
   
