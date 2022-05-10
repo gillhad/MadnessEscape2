@@ -31,8 +31,10 @@ public class PuzzleElementos : MonoBehaviour
     void Update()
     {
 
-        if (luci1.text == "70" && luci2.text == "" && luci3.text == "" && luci4.text == "" && luci5.text == "") { 
-        
+        if (luci1.text == "71" && luci2.text == "6" && luci3.text == "53" && luci4.text == "9" && luci5.text == "68"
+            && vati1.text == "23" && vati2.text == "85" && vati3.text == "53" && vati4.text == "20" && vati5.text == "7" && vati6.text == "8") {
+            Debug.Log("puzzle solved");
+            gameManager.elementsPuzzleSolved = true;
         }
 
     }

@@ -84,7 +84,8 @@ public class GameManager : MonoBehaviourPun
     public static int ml5 = 0;
     public static int ml8 = 8;
     bool potionReceived = false;
-        
+    public bool elementsPuzzleSolved = false;
+
 
     private void Awake()
     {
@@ -384,9 +385,13 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-    void puzzleElementos() { 
-        
-    
+    void puzzleElementos() {
+
+        if (elementsPuzzleSolved) {
+            Debug.Log("recuperado");
+            StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
+            OnResume();
+        }
     }
 
 
