@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviourPun
     public static int ml8 = 8;
     bool potionReceived = false;
     public bool elementsPuzzleSolved = false;
-
+    public bool lightPuzzleSolved = false;
 
     private void Awake()
     {
@@ -100,6 +100,10 @@ public class GameManager : MonoBehaviourPun
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+
+        if (GameObject.FindGameObjectWithTag("Potioncanvas") != null) {
+            potionCanvas = GameObject.FindGameObjectWithTag("Potioncanvas");
+        }
 
     }
     private void Update()
@@ -163,16 +167,20 @@ public class GameManager : MonoBehaviourPun
             playerHasMorningStar = true;
         }
 
+
+        //Si el canvas de pociones esta activo revisa que se solucione el problema
         if (potionCanvas.active) {
             PuzzleWater();
         }
 
-        /*if (puzzleElementosCanvas.active) {
+        
+        //Si elo canvas de elementos está activa revisa que se solucione el problema
+        if (puzzleElementosCanvas.active) {
             Debug.Log("elementos");
             puzzleElementos();
-        }*/
+        }
 
-
+       
     }
 
     /*
@@ -199,6 +207,18 @@ public class GameManager : MonoBehaviourPun
         lockText.text = lockValue.ToString();
     }
 
+
+   /*
+    * 
+    * Escribe un mensaje en pantalla que desaparece a los 2 segundos
+    * @param
+    * message -> el mensaje que aparecerá en pantalla
+    */
+    void printMessageOnScreen(string message) {
+        playerCanvas.SetActive(true);
+        playerCanvas.GetComponentInChildren<TextMeshPro>().text = message;
+        StartCoroutine(WaitFor2Sec(playerCanvas));
+    }
 
     //reinicia los comandos rotaci�n y movimiento del jugador
     public void OnResume() {
@@ -263,10 +283,7 @@ public class GameManager : MonoBehaviourPun
         Time.timeScale = 1;
     }
 
-    public void PrintText() {
-
-        Debug.Log("texto");
-    }
+    
 
     //Funcion para checkear el numero de cubos en el inventario
     private void checkBucketsInInventory(){
@@ -398,6 +415,25 @@ public class GameManager : MonoBehaviourPun
             Debug.Log("recuperado");
             StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
             OnResume();
+            if (lightPuzzleSolved)
+            {
+                printMessageOnScreen("Rápido, ya he abierto la puerta!");
+            }
+            else {
+                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
+            }
+        }
+    }
+
+    //Si solucionamos el puzzle de lucees lanza un mensaje
+    public void lightPuzzleSolution() {
+        if (potionReceived)
+        {
+            printMessageOnScreen("Rápido, ya he abierto la puerta!");
+        }
+        else
+        {
+            printMessageOnScreen("Debéis conseguir la poción para que pueda abrir la puerta");
         }
     }
 

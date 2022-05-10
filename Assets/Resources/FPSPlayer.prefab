@@ -12088,6 +12088,8 @@ MonoBehaviour:
   valueml3: {fileID: 6911799169780371184}
   valueml5: {fileID: 5132061953250250148}
   valueml8: {fileID: 8845133912169907346}
+  elementsPuzzleSolved: 0
+  lightPuzzleSolved: 0
 --- !u!114 &4223357817957833775
 MonoBehaviour:
   m_ObjectHideFlags: 0
