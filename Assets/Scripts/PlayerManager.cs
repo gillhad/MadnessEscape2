@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviourPun
 
 
     bool drawerSolved = false;
+    
 
 
     RaiseEventOptions options = new RaiseEventOptions()
@@ -140,7 +141,7 @@ public class PlayerManager : MonoBehaviourPun
             
         }
 
-        if (other.gameObject.name == "Elementos" && photonView.IsMine) {
+        if (other.gameObject.name == "Elementos" && photonView.IsMine && !gameManager.elementsPuzzleSolved) {
             gameManager.puzzleElementosCanvas.SetActive(true);
             Cursor.visible = true;
             gameManager.OnPause();

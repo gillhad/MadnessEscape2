@@ -73,6 +73,11 @@ public class GameManager : MonoBehaviourPun
     private bool moveRock1 = false;
     private bool moveRock2 = false;
     private bool moveRock3 = false;
+    private bool checkPotions = true;
+    private bool greenPotionCorrectPosition = false;
+
+    private bool redPotionCorrectPosition = false;
+    private bool bluePotionCorrectPosition = false;
 
     //Variables
     private int[] bookLockValue = { 5, 4, 2, 7 }; //array para probar el candado
@@ -84,7 +89,8 @@ public class GameManager : MonoBehaviourPun
     public static int ml5 = 0;
     public static int ml8 = 8;
     bool potionReceived = false;
-        
+    public bool elementsPuzzleSolved = false;
+    public bool lightPuzzleSolved = false;
 
     private void Awake()
     {
@@ -99,6 +105,10 @@ public class GameManager : MonoBehaviourPun
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+
+        if (GameObject.FindGameObjectWithTag("Potioncanvas") != null) {
+            potionCanvas = GameObject.FindGameObjectWithTag("Potioncanvas");
+        }
 
     }
     private void Update()
@@ -120,6 +130,23 @@ public class GameManager : MonoBehaviourPun
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
+
+        if(checkPotions)
+        {
+            if(!greenPotionCorrectPosition && GameObject.Find("Potion_green").gameObject.transform.position.z > 24.21f && GameObject.Find("Potion_green").gameObject.transform.position.z < 25.762f && GameObject.Find("Potion_green").gameObject.transform.position.x < 1.5f && GameObject.Find("Potion_green").gameObject.transform.position.x > 0.6f &&GameObject.Find("Potion_green").gameObject.transform.position.y < 1f)
+            {
+                greenPotionCorrectPosition = true;
+            }
+            if(!redPotionCorrectPosition && GameObject.Find("Potion_red").gameObject.transform.position.z > 20.479f && GameObject.Find("Potion_red").gameObject.transform.position.z < 21.604f && GameObject.Find("Potion_red").gameObject.transform.position.x < 13.106F && GameObject.Find("Potion_red").gameObject.transform.position.x > 11.9f && GameObject.Find("Potion_red").gameObject.transform.position.y < 1f)
+            {
+                redPotionCorrectPosition = true;
+            }
+            if(!bluePotionCorrectPosition && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z < 28.446f && GameObject.Find("Potion_blue").gameObject.transform.position.y < 1f && GameObject.Find("Potion_blue").gameObject.transform.position.x > 11.7f && GameObject.Find("Potion_blue").gameObject.transform.position.x < 13.2f)   
+            {
+                bluePotionCorrectPosition = true;
+            }
+        }
+
         //checks para las palancas
         if (lever1 != null)
         {
@@ -162,16 +189,20 @@ public class GameManager : MonoBehaviourPun
             playerHasMorningStar = true;
         }
 
+
+        //Si el canvas de pociones esta activo revisa que se solucione el problema
         if (potionCanvas.active) {
             PuzzleWater();
         }
 
-        /*if (puzzleElementosCanvas.active) {
+        
+        //Si elo canvas de elementos está activa revisa que se solucione el problema
+        if (puzzleElementosCanvas.active) {
             Debug.Log("elementos");
             puzzleElementos();
-        }*/
+        }
 
-
+       
     }
 
     /*
@@ -198,6 +229,18 @@ public class GameManager : MonoBehaviourPun
         lockText.text = lockValue.ToString();
     }
 
+
+   /*
+    * 
+    * Escribe un mensaje en pantalla que desaparece a los 2 segundos
+    * @param
+    * message -> el mensaje que aparecerá en pantalla
+    */
+    void printMessageOnScreen(string message) {
+        playerCanvas.SetActive(true);
+        playerCanvas.GetComponentInChildren<TextMeshPro>().text = message;
+        StartCoroutine(WaitFor2Sec(playerCanvas));
+    }
 
     //reinicia los comandos rotaci�n y movimiento del jugador
     public void OnResume() {
@@ -262,10 +305,7 @@ public class GameManager : MonoBehaviourPun
         Time.timeScale = 1;
     }
 
-    public void PrintText() {
-
-        Debug.Log("texto");
-    }
+    
 
     //Funcion para checkear el numero de cubos en el inventario
     private void checkBucketsInInventory(){
@@ -391,9 +431,32 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-    void puzzleElementos() { 
-        
-    
+    void puzzleElementos() {
+
+        if (elementsPuzzleSolved) {
+            Debug.Log("recuperado");
+            StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
+            OnResume();
+            if (lightPuzzleSolved)
+            {
+                printMessageOnScreen("Rápido, ya he abierto la puerta!");
+            }
+            else {
+                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
+            }
+        }
+    }
+
+    //Si solucionamos el puzzle de lucees lanza un mensaje
+    public void lightPuzzleSolution() {
+        if (potionReceived)
+        {
+            printMessageOnScreen("Rápido, ya he abierto la puerta!");
+        }
+        else
+        {
+            printMessageOnScreen("Debéis conseguir la poción para que pueda abrir la puerta");
+        }
     }
 
 

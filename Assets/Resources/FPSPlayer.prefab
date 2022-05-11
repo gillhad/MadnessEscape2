@@ -8564,7 +8564,7 @@ GameObject:
   - component: {fileID: 2850287585592100297}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12088,6 +12088,8 @@ MonoBehaviour:
   valueml3: {fileID: 6911799169780371184}
   valueml5: {fileID: 5132061953250250148}
   valueml8: {fileID: 8845133912169907346}
+  elementsPuzzleSolved: 0
+  lightPuzzleSolved: 0
 --- !u!114 &4223357817957833775
 MonoBehaviour:
   m_ObjectHideFlags: 0
