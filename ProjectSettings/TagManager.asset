@@ -9,6 +9,12 @@ TagManager:
   - Draggable
   - CanvasElemento
   - escena
+  - Potioncanvas
+  - ventanaA
+  - EspadaA
+  - VentanaClave
+  - Piedra
+  - EspadaB
   layers:
   - Default
   - TransparentFX
