@@ -143,6 +143,7 @@ public class NetWorkingManager : MonoBehaviourPunCallbacks
     public void StartGame()
     {
         PhotonNetwork.LoadLevel(1);
+        Debug.Log("Game started");
     }
 
 

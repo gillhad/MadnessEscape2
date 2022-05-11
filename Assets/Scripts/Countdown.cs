@@ -1,16 +1,17 @@
- using UnityEngine;
- using System.Collections;
- using Photon.Pun;
- using TMPro;
- 
- public class CountDownTimer : MonoBehaviour 
- {
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using TMPro;
+
+public class Countdown : MonoBehaviour
+{
+    public GameObject endGameUi;
     [SerializeField] private TMP_Text timerText;
 
-    [SerializeField, Tooltip("Tiempo en segundos")] private float timerTime;
-    private int minutes, seconds, cents;
+    [SerializeField, Tooltip("Tiempo en segundos")] public float timerTime;
+    public int minutes, seconds, cents;
 
-    private void Update(){
+    public void Update(){
 
         timerTime -= Time.deltaTime;
         if (timerTime < 0) timerTime = 0;
@@ -20,11 +21,15 @@
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
+        
         if (timerTime == 0)
         {
+            
+            Cursor.lockState = CursorLockMode.None;
+            endGameUi.SetActive(true);
+            Time.timeScale = 0f;
             Destroy(this);
-            Debug.Log("timer finished");
+            Debug.Log("Time Out");
         }
     }
- }
- 
+}

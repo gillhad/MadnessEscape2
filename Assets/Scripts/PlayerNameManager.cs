@@ -8,7 +8,8 @@ public class PlayerNameManager : MonoBehaviour
 {
     [SerializeField] TMP_InputField usernameInput;
 
-    public void OnUserNameInputValueChanged(){
+    public void OnUserNameInputValueChanged()
+    {
         PhotonNetwork.NickName = usernameInput.text;
     }
 }

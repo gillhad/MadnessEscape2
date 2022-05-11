@@ -6,50 +6,67 @@ using UnityEngine.SceneManagement;
 
 public class Pause : MonoBehaviour
 {
-    public static bool GameIsPaused = false;  
+    public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
 
-    void Update(){
+    PlayfabManager pfm;
+
+    public Countdown cd;
+
+    
+
+
+
+    void Update()
+    {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+            pfm.SendLeaderboard(cd.minutes, cd.seconds);
+
             if (GameIsPaused)
             {
                 Resume();
-            }else
+            }
+            else
             {
                 Paused();
             }
         }
     }
 
-    public void Resume(){
-         Cursor.lockState = CursorLockMode.Locked;
+    public void Resume()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
     }
 
-    void Paused(){
+    void Paused()
+    {
         Cursor.lockState = CursorLockMode.None;
         pauseMenuUi.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
     }
 
-    public void Quit(){
-       // StartCoroutine(LeaveAndLoad());
+    public void Quit()
+    {
+        // StartCoroutine(LeaveAndLoad());
         Application.Quit();
     }
 
-   /* IEnumerator LeaveAndLoad(){
-        PhotonNetwork.LeaveRoom();
-        while(PhotonNetwork.InRoom)
-            yield return null;
-        if (!PhotonNetwork.InRoom)
-        {
-            SceneManager.LoadScene(0);
-        }
+    /* IEnumerator LeaveAndLoad(){
+         PhotonNetwork.LeaveRoom();
+         while(PhotonNetwork.InRoom)
+             yield return null;
+         if (!PhotonNetwork.InRoom)
+         {
+             SceneManager.LoadScene(0);
+         }
 
-    }*/
+     }*/
 
 }
