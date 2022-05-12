@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviourPun
     public GameObject inventory;
     public GameObject morningStarPrefab;
     public GameObject terceraPista;
-   
+
 
     private GameObject lever1;
     private GameObject lever2;
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviourPun
     //Inventory Manager
     public InventoryManager inventoryManager;
 
-    
+
     //bool
     private bool isShowingInventory = false;
     //variable para decirle al juego si debe hacer check de cuantos cubos tenemos en inventario
@@ -61,10 +61,10 @@ public class GameManager : MonoBehaviourPun
 
     private bool checkLever = true;
 
-    public static bool door1CanBeOpened {get; set;} = false;
-    public static bool door2CanBeOpened {get; set;} = false;
-    public static bool lock1CanBeSeen {get; set;} = false;
-    public static bool playerHasMorningStar {get; set;} = false;
+    public static bool door1CanBeOpened { get; set; } = false;
+    public static bool door2CanBeOpened { get; set; } = false;
+    public static bool lock1CanBeSeen { get; set; } = false;
+    public static bool playerHasMorningStar { get; set; } = false;
 
     private bool lever1up;
     private bool lever2up;
@@ -98,15 +98,16 @@ public class GameManager : MonoBehaviourPun
 
     private void Start()
     {
-        GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
-        GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
-        GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, Random.Range(0, 360)); 
-        lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;        
+        GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, Random.Range(0, 360));
+        GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360));
+        GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, Random.Range(0, 360));
+        lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
 
-        if (GameObject.FindGameObjectWithTag("Potioncanvas") != null) {
+        if (GameObject.FindGameObjectWithTag("Potioncanvas") != null)
+        {
             potionCanvas = GameObject.FindGameObjectWithTag("Potioncanvas");
         }
 
@@ -124,24 +125,25 @@ public class GameManager : MonoBehaviourPun
             if (isShowingInventory)
             {
                 OnPause();
-            }else
+            }
+            else
             {
                 Time.timeScale = 1;
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
 
-        if(checkPotions)
+        if (checkPotions)
         {
-            if(!greenPotionCorrectPosition && GameObject.Find("Potion_green").gameObject.transform.position.z > 24.21f && GameObject.Find("Potion_green").gameObject.transform.position.z < 25.762f && GameObject.Find("Potion_green").gameObject.transform.position.x < 1.5f && GameObject.Find("Potion_green").gameObject.transform.position.x > 0.6f &&GameObject.Find("Potion_green").gameObject.transform.position.y < 1f)
+            if (!greenPotionCorrectPosition && GameObject.Find("Potion_green").gameObject.transform.position.z > 24.21f && GameObject.Find("Potion_green").gameObject.transform.position.z < 25.762f && GameObject.Find("Potion_green").gameObject.transform.position.x < 1.5f && GameObject.Find("Potion_green").gameObject.transform.position.x > 0.6f && GameObject.Find("Potion_green").gameObject.transform.position.y < 1f)
             {
                 greenPotionCorrectPosition = true;
             }
-            if(!redPotionCorrectPosition && GameObject.Find("Potion_red").gameObject.transform.position.z > 20.479f && GameObject.Find("Potion_red").gameObject.transform.position.z < 21.604f && GameObject.Find("Potion_red").gameObject.transform.position.x < 13.106F && GameObject.Find("Potion_red").gameObject.transform.position.x > 11.9f && GameObject.Find("Potion_red").gameObject.transform.position.y < 1f)
+            if (!redPotionCorrectPosition && GameObject.Find("Potion_red").gameObject.transform.position.z > 20.479f && GameObject.Find("Potion_red").gameObject.transform.position.z < 21.604f && GameObject.Find("Potion_red").gameObject.transform.position.x < 13.106F && GameObject.Find("Potion_red").gameObject.transform.position.x > 11.9f && GameObject.Find("Potion_red").gameObject.transform.position.y < 1f)
             {
                 redPotionCorrectPosition = true;
             }
-            if(!bluePotionCorrectPosition && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z < 28.446f && GameObject.Find("Potion_blue").gameObject.transform.position.y < 1f && GameObject.Find("Potion_blue").gameObject.transform.position.x > 11.7f && GameObject.Find("Potion_blue").gameObject.transform.position.x < 13.2f)   
+            if (!bluePotionCorrectPosition && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z > 27.357f && GameObject.Find("Potion_blue").gameObject.transform.position.z < 28.446f && GameObject.Find("Potion_blue").gameObject.transform.position.y < 1f && GameObject.Find("Potion_blue").gameObject.transform.position.x > 11.7f && GameObject.Find("Potion_blue").gameObject.transform.position.x < 13.2f)
             {
                 bluePotionCorrectPosition = true;
             }
@@ -156,13 +158,14 @@ public class GameManager : MonoBehaviourPun
             lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
         }
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
-        if(checkLever){
-            if(lever1up && !lever2up && !lever3up && lever4up)
-                {
-                    //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
-                    OpenClosetDoor();
-                    checkLever = false;
-                }
+        if (checkLever)
+        {
+            if (lever1up && !lever2up && !lever3up && lever4up)
+            {
+                //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
+                OpenClosetDoor();
+                checkLever = false;
+            }
         }
 
         //Si est� el men� de candado abierto revisa si se cumple el puzzle
@@ -172,18 +175,18 @@ public class GameManager : MonoBehaviourPun
         }
 
         //si la variable de check cubos en el inventario es true llamaremos a la funcion
-        if(checkBuckets) checkBucketsInInventory();
+        if (checkBuckets) checkBucketsInInventory();
 
 
         //Check para saber si el jugador tiene una llave en su inventario
-        if(checkKey1 && inventoryManager.Items.Where(x => x.itemName.Equals("Key1")).ToList<Item>().Count() == 1)
+        if (checkKey1 && inventoryManager.Items.Where(x => x.itemName.Equals("Key1")).ToList<Item>().Count() == 1)
         {
             checkKey1 = false;
             lock1CanBeSeen = true;
         }
 
         //Check para saber si un jugador tiene el martillo en su inventario
-        if(checkMorningStar && inventoryManager.Items.Where(x => x.itemName.Equals("MorningStar")).ToList<Item>().Count() == 1)
+        if (checkMorningStar && inventoryManager.Items.Where(x => x.itemName.Equals("MorningStar")).ToList<Item>().Count() == 1)
         {
             checkMorningStar = false;
             playerHasMorningStar = true;
@@ -191,18 +194,20 @@ public class GameManager : MonoBehaviourPun
 
 
         //Si el canvas de pociones esta activo revisa que se solucione el problema
-        if (potionCanvas.active) {
+        if (potionCanvas.active)
+        {
             PuzzleWater();
         }
 
-        
+
         //Si elo canvas de elementos está activa revisa que se solucione el problema
-        if (puzzleElementosCanvas.active) {
+        if (puzzleElementosCanvas.active)
+        {
             Debug.Log("elementos");
             puzzleElementos();
         }
 
-       
+
     }
 
     /*
@@ -210,7 +215,7 @@ public class GameManager : MonoBehaviourPun
      * @params le pasa el par�metro de texto del bot�n para que lo lea y modifique
      *  
      */
-    
+
     public void OnClickLockButton(TextMeshProUGUI lockText)
     {
         string value = lockText.text;
@@ -230,20 +235,22 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-   /*
-    * 
-    * Escribe un mensaje en pantalla que desaparece a los 2 segundos
-    * @param
-    * message -> el mensaje que aparecerá en pantalla
-    */
-    void printMessageOnScreen(string message) {
+    /*
+     * 
+     * Escribe un mensaje en pantalla que desaparece a los 2 segundos
+     * @param
+     * message -> el mensaje que aparecerá en pantalla
+     */
+    void printMessageOnScreen(string message)
+    {
         playerCanvas.SetActive(true);
         playerCanvas.GetComponentInChildren<TextMeshPro>().text = message;
         StartCoroutine(WaitFor2Sec(playerCanvas));
     }
 
     //reinicia los comandos rotaci�n y movimiento del jugador
-    public void OnResume() {
+    public void OnResume()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
     }
@@ -256,7 +263,7 @@ public class GameManager : MonoBehaviourPun
         Time.timeScale = 0;
     }
 
-    public void checkBookLockResult()   
+    public void checkBookLockResult()
     {
         int book1 = int.Parse(lock1.text);
         int book2 = int.Parse(lock2.text);
@@ -274,7 +281,7 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    
+
 
     /*
      * Desactiva el gameObject que se le pasa
@@ -296,28 +303,33 @@ public class GameManager : MonoBehaviourPun
 
     }
 
-    public void OpenDoor(GameObject door) {
-        
-        }
+    public void OpenDoor(GameObject door)
+    {
 
-    public void closeCanvas(GameObject gameObject) {
+    }
+
+    public void closeCanvas(GameObject gameObject)
+    {
         gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 
-    
+
 
     //Funcion para checkear el numero de cubos en el inventario
-    private void checkBucketsInInventory(){
+    private void checkBucketsInInventory()
+    {
         int bucketInInventory = 0;
         //Recorremos el inventario
-        inventoryManager.Items.ForEach(item => {
-            if(item.itemName.Equals("Bucket")) bucketInInventory++;
+        inventoryManager.Items.ForEach(item =>
+        {
+            if (item.itemName.Equals("Bucket")) bucketInInventory++;
         });
 
         //si tenemos 3 cubos, ponemos el checkBuckets a true para que no se vuelva a ejecutar la funcion
         //y ahorrar capacidad de proceso, y también ponemos a true la variable estatica door1CanBeOpened
-        if(bucketInInventory == 3){
+        if (bucketInInventory == 3)
+        {
             checkBuckets = false;
             door1CanBeOpened = true;
         }
@@ -350,15 +362,17 @@ public class GameManager : MonoBehaviourPun
     }
 
     //Quitar listener al deshabilitar el gameObject
-    private void OnDisable(){
+    private void OnDisable()
+    {
         PhotonNetwork.NetworkingClient.EventReceived -= NetworkingClient_EventReceived;
     }
 
     //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
-    private void NetworkingClient_EventReceived(EventData obj){
-        if(obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
+    private void NetworkingClient_EventReceived(EventData obj)
+    {
+        if (obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
         {
-            if(GameObject.Find("morningStar(Clone)") == null && photonView.IsMine && GameObject.Find("MorningStar Variant(Clone)") == null)
+            if (GameObject.Find("morningStar(Clone)") == null && photonView.IsMine && GameObject.Find("MorningStar Variant(Clone)") == null)
             {
                 Instantiate(morningStarPrefab, new Vector3(7.9f, 0.89f, 0.693f), new Quaternion(-45f, 0f, 0f, 0f)).transform.Rotate(90f, 0f, 0f);
                 morningStarPrefab.name = "morningStar";
@@ -367,51 +381,53 @@ public class GameManager : MonoBehaviourPun
                 GameObject.Find("Tecera Pista(Clone)").transform.position = new Vector3(0.507f, 1.939f, 28);
             }
         }
-        if(obj.Code == (uint)Events.ROTATE_ITEM)
+        if (obj.Code == (uint)Events.ROTATE_ITEM)
+        {
+            float data = (float)obj.CustomData;
+            if (moveRock1)
             {
-                float data = (float)obj.CustomData;
-                if(moveRock1)
-                {
-                    GameObject.Find("stone_row_1").transform.Rotate(0, 0, data);
-                }
-                if(moveRock2)
-                {
-                    GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, data);           
-                }
-                if(moveRock3)
-                {
-                    GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, data);
-                }
+                GameObject.Find("stone_row_1").transform.Rotate(0, 0, data);
             }
-            if(obj.Code == (uint)Events.CAN_ROTATE_STONES)
+            if (moveRock2)
             {
-                object[] datas = (object[])obj.CustomData;
-                switch ((int)datas[1])
-                {
-                    case 1:
-                        Debug.Log(moveRock1);
-                        moveRock1 = (bool)datas[0];
-                        break;
-                    case 2:
-                        moveRock2 = (bool)datas[0];
-                        break;
-                    case 3:
-                        moveRock3 = (bool)datas[0];
-                        break;
-                    default:
-                        break;
+                GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, data);
+            }
+            if (moveRock3)
+            {
+                GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, data);
+            }
+        }
+        if (obj.Code == (uint)Events.CAN_ROTATE_STONES)
+        {
+            object[] datas = (object[])obj.CustomData;
+            switch ((int)datas[1])
+            {
+                case 1:
+                    Debug.Log(moveRock1);
+                    moveRock1 = (bool)datas[0];
+                    break;
+                case 2:
+                    moveRock2 = (bool)datas[0];
+                    break;
+                case 3:
+                    moveRock3 = (bool)datas[0];
+                    break;
+                default:
+                    break;
 
-                }
             }
+        }
     }
 
-    void PuzzleWater() {
+    void PuzzleWater()
+    {
 
         ml3 = int.Parse(valueml3.text);
         ml5 = int.Parse(valueml5.text);
         ml8 = int.Parse(valueml8.text);
- 
-        if (ml5==4 && ml8 == 4) {
+
+        if (ml5 == 4 && ml8 == 4)
+        {
             //puzzle conseguido
             Debug.Log("conseguido");
             potionReceived = true;
@@ -420,10 +436,11 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void bookDrawerPuzzle() {
-            Debug.Log("puzzle solved");
-             OnResume();
-             StartCoroutine(WaitFor2Sec(drawerCanvas));
+    public void bookDrawerPuzzle()
+    {
+        Debug.Log("puzzle solved");
+        OnResume();
+        StartCoroutine(WaitFor2Sec(drawerCanvas));
 
         //animación de abrir puerta secreta
         FindObjectOfType<ControllerAnimations>().openWall();
@@ -431,9 +448,11 @@ public class GameManager : MonoBehaviourPun
     }
 
 
-    void puzzleElementos() {
+    void puzzleElementos()
+    {
 
-        if (elementsPuzzleSolved) {
+        if (elementsPuzzleSolved)
+        {
             Debug.Log("recuperado");
             StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
             OnResume();
@@ -441,14 +460,16 @@ public class GameManager : MonoBehaviourPun
             {
                 printMessageOnScreen("Rápido, ya he abierto la puerta!");
             }
-            else {
+            else
+            {
                 printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
             }
         }
     }
 
     //Si solucionamos el puzzle de lucees lanza un mensaje
-    public void lightPuzzleSolution() {
+    public void lightPuzzleSolution()
+    {
         if (potionReceived)
         {
             printMessageOnScreen("Rápido, ya he abierto la puerta!");
