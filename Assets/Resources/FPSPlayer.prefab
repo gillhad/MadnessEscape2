@@ -5821,8 +5821,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Para t\xFA poder salir, tu compa\xF1ero deber\xE1 encontrar los 3 cubos,
-    y tu deber\xE1s encontrar los 3 libros para que tu compa\xF1ero pueda salir.\n\n\"La
+  m_Text: "Para t\xFA poder salir, tu compa\xF1ero deber\xE1 encontrar los 2 cubos,
+    y tu deber\xE1s encontrar los 2 libros para que tu compa\xF1ero pueda salir.\n\n\"La
     se\xF1al para abrir el armario hace forma de V cortada por la mitad\""
 --- !u!1 &4039508709959395952
 GameObject:

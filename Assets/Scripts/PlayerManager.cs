@@ -127,7 +127,6 @@ public class PlayerManager : MonoBehaviourPun
         }
         if (other.gameObject.name == "stone_row_1" && photonView.IsMine)
         {
-            Debug.Log("entre en 1");
             object[] data = { true, (int)1 };
             PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
         }

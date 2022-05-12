@@ -4,14 +4,12 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using ExitGames.Client.Photon;
+using MadnessEscape2.Assets.Scripts;
 
 public class Door2Animation : MonoBehaviourPun
 {
 
-    public bool canBeOpened = false;
-
-    //Constante para poner el evento a enviar
-    private const byte OPEN_DOOR_1_EVENT = 0;
+    public bool CheckcanBeOpened = true;
 
     [SerializeField] private Animator animator = null;
 
@@ -56,8 +54,8 @@ public class Door2Animation : MonoBehaviourPun
 
     //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
     private void NetworkingClient_EventReceived(EventData obj){
-        if(obj.Code == OPEN_DOOR_1_EVENT)
-        {
+        if(obj.Code == (uint)Events.OPEN_DOOR_2_EVENT)
+        {   
             animator.Play("OpenDoor",0,0.0f);
             Collider.Destroy(this);
         }
@@ -70,7 +68,9 @@ public class Door2Animation : MonoBehaviourPun
             CachingOption = EventCaching.DoNotCache,
             Receivers = ReceiverGroup.All
         };
-        PhotonNetwork.RaiseEvent(OPEN_DOOR_1_EVENT, null, options, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent((byte)Events.OPEN_DOOR_2_EVENT, null, options, SendOptions.SendReliable);
     }
+
+
 
 }
