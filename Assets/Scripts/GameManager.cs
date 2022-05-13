@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviourPun
     private GameObject lever3;
     private GameObject lever4;
 
+    private GameObject lever5;
+
     public GameObject potionCanvas;
     public GameObject drawerCanvas;
     public GameObject puzzleElementosCanvas;
@@ -72,6 +74,7 @@ public class GameManager : MonoBehaviourPun
     private bool lever2up;
     private bool lever3up;
     private bool lever4up;
+    public bool lever5up;
     private bool moveRock1 = false;
     private bool moveRock2 = false;
     private bool moveRock3 = false;
@@ -107,6 +110,10 @@ public class GameManager : MonoBehaviourPun
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+
+        //--------------------------
+        lever5 = GameObject.Find("Lever5").transform.GetChild(1).gameObject;
+        //--------------------------
 
         if (GameObject.FindGameObjectWithTag("Potioncanvas") != null)
         {
@@ -168,6 +175,9 @@ public class GameManager : MonoBehaviourPun
             lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
             lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
             lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+            //---------
+            lever5up = lever5.transform.localRotation.eulerAngles.x > 150;
+            //-----------
         }
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if (checkLever)
@@ -179,6 +189,16 @@ public class GameManager : MonoBehaviourPun
                 checkLever = false;
             }
         }
+//---------------------
+        if (checkLever)
+        {
+            if (!lever5up)
+            {
+                
+                checkLever = false;
+            }
+        }
+//-------------------------       
 
         if(checkRock) checkRocks();
 
@@ -206,6 +226,8 @@ public class GameManager : MonoBehaviourPun
             checkMorningStar = false;
             playerHasMorningStar = true;
         }
+
+        
 
 
         //Si el canvas de pociones esta activo revisa que se solucione el problema

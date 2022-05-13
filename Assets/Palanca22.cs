@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverScript : MonoBehaviour
+public class Palanca22 : MonoBehaviour
 {
     public GameObject lever;
+
+    public GameObject sword;
     
     private bool up;
 
@@ -22,8 +24,10 @@ public class LeverScript : MonoBehaviour
             if(up){
                 lever.transform.Rotate(120f, 0, 0f);
                 up = false;
+                sword.GetComponent<Rigidbody>().useGravity = true;
             }else if(!up)
             {
+                
                 lever.transform.Rotate(-120f, 0, 0f);
                 up = true;
             }

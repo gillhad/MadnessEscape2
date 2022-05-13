@@ -15,11 +15,13 @@ TagManager:
   - VentanaClave
   - Piedra
   - EspadaB
+  - PistaArmario22
+  - Puerta21
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

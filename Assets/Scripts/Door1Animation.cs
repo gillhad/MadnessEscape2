@@ -40,6 +40,8 @@ public class Door1Animation : MonoBehaviourPun
             OpenDoor();
             GameManager.door1CanBeOpened = false;
         }
+
+        
     }
 
     //Añadir listener al habilitar el gameoOject
