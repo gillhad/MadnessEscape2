@@ -41,6 +41,8 @@ public class GameManager : MonoBehaviourPun
     private GameObject lever3;
     private GameObject lever4;
 
+    private GameObject lever5;
+
     public GameObject potionCanvas;
     public GameObject drawerCanvas;
     public GameObject puzzleElementosCanvas;
@@ -55,9 +57,11 @@ public class GameManager : MonoBehaviourPun
     private bool isShowingInventory = false;
     //variable para decirle al juego si debe hacer check de cuantos cubos tenemos en inventario
     private bool checkBuckets = true;
+    private bool checkBooks = true;
 
     private bool checkKey1 = true;
     private bool checkMorningStar = true;
+    private bool checkRock = true;
 
     private bool checkLever = true;
 
@@ -70,6 +74,7 @@ public class GameManager : MonoBehaviourPun
     private bool lever2up;
     private bool lever3up;
     private bool lever4up;
+    public bool lever5up;
     private bool moveRock1 = false;
     private bool moveRock2 = false;
     private bool moveRock3 = false;
@@ -105,6 +110,10 @@ public class GameManager : MonoBehaviourPun
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
         lever3 = GameObject.Find("Lever3").transform.GetChild(1).gameObject;
         lever4 = GameObject.Find("Lever4").transform.GetChild(1).gameObject;
+
+        //--------------------------
+        lever5 = GameObject.Find("Lever5").transform.GetChild(1).gameObject;
+        //--------------------------
 
         if (GameObject.FindGameObjectWithTag("Potioncanvas") != null)
         {
@@ -147,6 +156,16 @@ public class GameManager : MonoBehaviourPun
             {
                 bluePotionCorrectPosition = true;
             }
+            if(greenPotionCorrectPosition && redPotionCorrectPosition && bluePotionCorrectPosition)
+            {
+                RaiseEventOptions options = new RaiseEventOptions()
+                {
+                    CachingOption = EventCaching.DoNotCache,
+                    Receivers = ReceiverGroup.All
+                };
+                PhotonNetwork.RaiseEvent((byte)Events.OPEN_CLOSET2_ROOM_1_EVENT, null, options, SendOptions.SendReliable);
+                checkPotions = false;
+            }
         }
 
         //checks para las palancas
@@ -156,6 +175,9 @@ public class GameManager : MonoBehaviourPun
             lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
             lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
             lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+            //---------
+            lever5up = lever5.transform.localRotation.eulerAngles.x > 150;
+            //-----------
         }
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if (checkLever)
@@ -167,6 +189,18 @@ public class GameManager : MonoBehaviourPun
                 checkLever = false;
             }
         }
+//---------------------
+        if (checkLever)
+        {
+            if (!lever5up)
+            {
+                
+                checkLever = false;
+            }
+        }
+//-------------------------       
+
+        if(checkRock) checkRocks();
 
         //Si est� el men� de candado abierto revisa si se cumple el puzzle
         if (playerLockCanvas.active)
@@ -176,6 +210,7 @@ public class GameManager : MonoBehaviourPun
 
         //si la variable de check cubos en el inventario es true llamaremos a la funcion
         if (checkBuckets) checkBucketsInInventory();
+        if (checkBooks) checkBooksInInventory();
 
 
         //Check para saber si el jugador tiene una llave en su inventario
@@ -191,6 +226,8 @@ public class GameManager : MonoBehaviourPun
             checkMorningStar = false;
             playerHasMorningStar = true;
         }
+
+        
 
 
         //Si el canvas de pociones esta activo revisa que se solucione el problema
@@ -281,6 +318,20 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    private void checkRocks()
+    {
+        if(((GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z >= 85f && GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z <= 95f) || (GameObject.Find("stone_row_1").transform.rotation.z >= -5f && GameObject.Find("stone_row_1").transform.rotation.z <= 5f)) &&
+           (GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z >= 85f && GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z <= 95f) || (GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z >= -5f && GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z <= 5f) &&
+           (GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z >= 85f && GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z <= 95f) || (GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z >= -5f && GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z <= 5f))
+        {
+            RaiseEventOptions options = new RaiseEventOptions()
+            {
+                CachingOption = EventCaching.DoNotCache,
+                Receivers = ReceiverGroup.All
+            };
+            PhotonNetwork.RaiseEvent((byte)Events.OPEN_CHEST2_ROOM_2, null, options, SendOptions.SendReliable);
+        }
+    }
 
 
     /*
@@ -328,10 +379,28 @@ public class GameManager : MonoBehaviourPun
 
         //si tenemos 3 cubos, ponemos el checkBuckets a true para que no se vuelva a ejecutar la funcion
         //y ahorrar capacidad de proceso, y también ponemos a true la variable estatica door1CanBeOpened
-        if (bucketInInventory == 3)
+        if (bucketInInventory == 2)
         {
+            GameManager.door1CanBeOpened = true;
             checkBuckets = false;
-            door1CanBeOpened = true;
+        }
+    }
+
+    private void checkBooksInInventory()
+    {
+        int bookInInventory = 0;
+        //Recorremos el inventario
+        inventoryManager.Items.ForEach(item =>
+        {
+            if (item.itemName.Equals("Book")) bookInInventory++;
+        });
+
+        //si tenemos 3 cubos, ponemos el checkBuckets a true para que no se vuelva a ejecutar la funcion
+        //y ahorrar capacidad de proceso, y también ponemos a true la variable estatica door1CanBeOpened
+        if (bookInInventory == 2)
+        {
+            GameManager.door2CanBeOpened = true;
+            checkBooks = false;
         }
     }
 
@@ -403,7 +472,6 @@ public class GameManager : MonoBehaviourPun
             switch ((int)datas[1])
             {
                 case 1:
-                    Debug.Log(moveRock1);
                     moveRock1 = (bool)datas[0];
                     break;
                 case 2:

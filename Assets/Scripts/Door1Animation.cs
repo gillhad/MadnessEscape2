@@ -9,7 +9,7 @@ using MadnessEscape2.Assets.Scripts;
 public class Door1Animation : MonoBehaviourPun
 {
 
-    public bool canBeOpened = false;
+    public bool CheckcanBeOpened = true;
 
     [SerializeField] private Animator animator = null;
 
@@ -38,7 +38,10 @@ public class Door1Animation : MonoBehaviourPun
         //Checkeamos si la variable estatica del gameManager esta a true, si lo está llamamos a OpenDoor
         if (GameManager.door1CanBeOpened) {
             OpenDoor();
+            GameManager.door1CanBeOpened = false;
         }
+
+        
     }
 
     //Añadir listener al habilitar el gameoOject
@@ -55,7 +58,7 @@ public class Door1Animation : MonoBehaviourPun
     //Este es el metodo que recibira el paquete, si el codigo es igual a 1, llamaremos a la funcion OpenDoor
     private void NetworkingClient_EventReceived(EventData obj){
         if(obj.Code == (uint)Events.OPEN_DOOR_1_EVENT)
-        {
+        {      
             animator.Play("OpenDoor",0,0.0f);
             Collider.Destroy(this);
         }
@@ -66,7 +69,7 @@ public class Door1Animation : MonoBehaviourPun
         RaiseEventOptions options = new RaiseEventOptions()
         {
             CachingOption = EventCaching.DoNotCache,
-            Receivers = ReceiverGroup.All
+            Receivers = ReceiverGroup.Others
         };
         PhotonNetwork.RaiseEvent((byte)Events.OPEN_DOOR_1_EVENT, null, options, SendOptions.SendReliable);
     }

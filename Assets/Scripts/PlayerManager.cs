@@ -33,9 +33,13 @@ public class PlayerManager : MonoBehaviourPun
 
     public GameObject PistaLetras;
 
-    GameObject sword;
-    GameObject ventana;
-    GameObject sword2;
+    public GameObject PistaArmario;
+
+    public GameObject Sueño;
+
+
+
+
 
 
     bool drawerSolved = false;
@@ -56,12 +60,11 @@ public class PlayerManager : MonoBehaviourPun
             gameManager = gameManager = FindObjectOfType<GameManager>();
         }
 
-        if (sword == null)
+        if (PistaArmario == null)
         {
-            sword = GameObject.FindGameObjectWithTag("EspadaA");
+            PistaArmario = GameObject.FindGameObjectWithTag("PistaArmario22");
         }
-        ventana = GameObject.FindGameObjectWithTag("VentanaClave");
-        sword2 = GameObject.FindGameObjectWithTag("EspadaB");
+
     }
     void Update()
     {
@@ -127,7 +130,6 @@ public class PlayerManager : MonoBehaviourPun
         }
         if (other.gameObject.name == "stone_row_1" && photonView.IsMine)
         {
-            Debug.Log("entre en 1");
             object[] data = { true, (int)1 };
             PhotonNetwork.RaiseEvent((byte)Events.CAN_ROTATE_STONES, data, options, SendOptions.SendUnreliable);
         }
@@ -148,11 +150,16 @@ public class PlayerManager : MonoBehaviourPun
             PistaLetras.SetActive(true);
         }
 
-        if (sword2.name == "sword_a (1)")
+        if (other.gameObject.name == "wood_logs (2)" && photonView.IsMine)
         {
-            sword.GetComponent<Rigidbody>().useGravity = true;
-            // sword.SetActive(true);
+            PistaArmario.SetActive(true);
         }
+
+        if (other.gameObject.name == "Table_Wooden_02 (1)" && photonView.IsMine)
+        {
+            Sueño.SetActive(true);
+        }
+
         //----------------------------------------------
 
 
@@ -220,6 +227,14 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "PapelPistaLetras" && photonView.IsMine)
         {
             PistaLetras.SetActive(false);
+        }
+        if (other.gameObject.name == "wood_logs (2)" && photonView.IsMine)
+        {
+            PistaArmario.SetActive(false);
+        }
+        if (other.gameObject.name == "Table_Wooden_02 (1)" && photonView.IsMine)
+        {
+            Sueño.SetActive(false);
         }
     }
 
