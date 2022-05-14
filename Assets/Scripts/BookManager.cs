@@ -6,7 +6,7 @@ public class BookManager : MonoBehaviour
 {
     public List<GameObject> books;
     public List<GameObject> huecos;
-    public bool solved = false;
+    public static bool solved = false;
     private static GameManager gameManager;
     Vector3 position1;
     Vector3 position2;
@@ -56,13 +56,7 @@ public class BookManager : MonoBehaviour
                 Debug.Log("solved");
                 solved = true;
                 gameManager.booksPuzzleSolved = true;
-                FindObjectOfType<ControllerAnimations>().openWall();
-                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
-                foreach (var item in buttons){
-            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
-        }
-                gameManager.drawerCanvas.SetActive(false);
-                gameManager.OnResume();
+                
             }
         }else{
             FindObjectOfType<ControllerAnimations>().openWall();

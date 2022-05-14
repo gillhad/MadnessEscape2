@@ -169,7 +169,7 @@ public class PlayerManager : MonoBehaviourPun
            canvasPista32.SetActive(true);
         }
 
-        if (other.gameObject.name == "PapelPociones" && photonView.IsMine)
+        if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
         {
             Debug.Log("pantalla d pocions");
             gameManager.OnPause();
@@ -255,6 +255,10 @@ public class PlayerManager : MonoBehaviourPun
         }
         if(other.gameObject.name == "TablaPer" && photonView.IsMine){
             canvasTabla.SetActive(false);
+        }
+
+        if(other.gameObject.name== "The End"){
+            ///mostrar canvas d final y gaurdar datos partida
         }
         
     }

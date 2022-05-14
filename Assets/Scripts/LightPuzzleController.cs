@@ -22,7 +22,7 @@ public class LightPuzzleController : MonoBehaviour
     public bool btnpress5;
     public bool btnpress6;
 
-    float btnDown = 0.5f;
+    float btnDown = 0.1f;
 
     private void Start()
     {

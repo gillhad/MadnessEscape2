@@ -239,7 +239,14 @@ public class GameManager : MonoBehaviourPun
             puzzleElementos();
         }
 
-       
+       if(drawerCanvas.active){
+           puzzleBooks();
+       }
+
+       if(potionReceived && lightPuzzleSolved){
+           Debug.Log("s abre la purta");
+           openFinalDoor();
+       }
 
 
     }
@@ -484,6 +491,19 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    void puzzleBooks(){
+        if(booksPuzzleSolved){
+            Debug.Log("s ha solucionado");
+            FindObjectOfType<ControllerAnimations>().openWall();
+                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
+                foreach (var item in buttons){
+            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
+        }
+                drawerCanvas.SetActive(false);
+                OnResume();
+        }
+    }
+
     void PuzzleWater()
     {
         Debug.Log("puzzl activado");
@@ -542,9 +562,10 @@ public class GameManager : MonoBehaviourPun
 
     void openFinalDoor(){
         var doors = FindObjectsOfType<FinalDoorController>();
+        Debug.Log(doors.Length);
         foreach (var item in doors)
         {
-            item.OpenDoor();
+            item.openDoor();
         }
     }
 

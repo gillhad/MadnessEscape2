@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FinalDoorController : MonoBehaviour
 {
-    [SerializeField] Animator DoorController = null;
+    [SerializeField] Animator DoorController;
 
-    public void OpenDoor(){
+    public void openDoor(){
+        Debug.Log("HAC PLAY");
         DoorController.SetBool("OpenDoor", true);
     }
 }
