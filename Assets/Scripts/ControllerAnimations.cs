@@ -10,4 +10,5 @@ public class ControllerAnimations : MonoBehaviour
     {
         wallAnimationController.SetBool("OpenWall", true);
     }
+    
 }

@@ -16,8 +16,7 @@ public class OnDrag3D : MonoBehaviourPun
 
 
     
-    [SerializeField]
-    private float dampingSpeed = 0.3f;    
+    [SerializeField] 
     public float mouseSensibility = 50;
   
 

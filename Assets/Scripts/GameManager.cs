@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviourPun
     public PhotonView photonView;
     BookManager bookManager;
     PlayerManager playerManager;
-    [SerializeField] Animator wallAnimationController;
 
     //public SetTargetFrameRate targetFrameRate;
 
@@ -93,12 +92,14 @@ public class GameManager : MonoBehaviourPun
     public static int ml3 = 0;
     public static int ml5 = 0;
     public static int ml8 = 8;
-    bool potionReceived = false;
+    public bool potionReceived = false;
     public bool elementsPuzzleSolved = false;
     public bool lightPuzzleSolved = false;
+    public bool booksPuzzleSolved = false;
 
     private void Awake()
     {
+        
     }
 
     private void Start()
@@ -114,11 +115,6 @@ public class GameManager : MonoBehaviourPun
         //--------------------------
         lever5 = GameObject.Find("Lever5").transform.GetChild(1).gameObject;
         //--------------------------
-
-        if (GameObject.FindGameObjectWithTag("Potioncanvas") != null)
-        {
-            potionCanvas = GameObject.FindGameObjectWithTag("Potioncanvas");
-        }
 
     }
     private void Update()
@@ -240,9 +236,10 @@ public class GameManager : MonoBehaviourPun
         //Si elo canvas de elementos está activa revisa que se solucione el problema
         if (puzzleElementosCanvas.active)
         {
-            Debug.Log("elementos");
             puzzleElementos();
         }
+
+       
 
 
     }
@@ -489,7 +486,7 @@ public class GameManager : MonoBehaviourPun
 
     void PuzzleWater()
     {
-
+        Debug.Log("puzzl activado");
         ml3 = int.Parse(valueml3.text);
         ml5 = int.Parse(valueml5.text);
         ml8 = int.Parse(valueml8.text);
@@ -504,21 +501,7 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    public void bookDrawerPuzzle()
-    {
-        Debug.Log("puzzle solved");
-        OnResume();
-        StartCoroutine(WaitFor2Sec(drawerCanvas));
-
-        //animación de abrir puerta secreta
-        FindObjectOfType<ControllerAnimations>().openWall();
-        var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
-        foreach (var item in buttons){
-            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
-        }
-        
-
-    }
+    
 
 
     void puzzleElementos()
@@ -531,7 +514,9 @@ public class GameManager : MonoBehaviourPun
             OnResume();
             if (lightPuzzleSolved)
             {
+                Debug.Log("s acabó");
                 printMessageOnScreen("Rápido, ya he abierto la puerta!");
+                openFinalDoor();
             }
             else
             {
@@ -545,7 +530,9 @@ public class GameManager : MonoBehaviourPun
     {
         if (potionReceived)
         {
+             Debug.Log("s acabó");
             printMessageOnScreen("Rápido, ya he abierto la puerta!");
+            openFinalDoor();
         }
         else
         {
@@ -553,5 +540,12 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
+    void openFinalDoor(){
+        var doors = FindObjectsOfType<FinalDoorController>();
+        foreach (var item in doors)
+        {
+            item.OpenDoor();
+        }
+    }
 
 }

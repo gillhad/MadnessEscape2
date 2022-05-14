@@ -44,23 +44,23 @@ public class OnDropItem : MonoBehaviour, IDropHandler
 
                 if (GetComponentInChildren<Text>().text != "0")
                 {
-                    GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/GreenPotion");
+                    GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Full_Pot");
                 }
                 else
                 {
-                    GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPotion");
+                    GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPot");
                 }
                 if (eventData.pointerDrag.GetComponentInChildren<Text>().text != "0")
                 {
-                    eventData.pointerDrag.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Sprites/GreenPotion");
+                    eventData.pointerDrag.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Sprites/Full_Pot");
                 }
                 else
                 {
-                    eventData.pointerDrag.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPotion");
+                    eventData.pointerDrag.GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPot");
                 }
 
 
-                //Comrpobamos el valor del objeto donde se recibe líquido
+                //Comrpobamos el valor del objeto donde se recibe lï¿½quido
                 if (GetComponentInChildren<Text>().name == "3")
                 {
                     GameManager.ml3 = int.Parse(GetComponentInChildren<Text>().text);
@@ -74,7 +74,7 @@ public class OnDropItem : MonoBehaviour, IDropHandler
                     GameManager.ml8 = int.Parse(GetComponentInChildren<Text>().text);
                 }
 
-                //Comprobamos el valor de donde tiramos líquido
+                //Comprobamos el valor de donde tiramos lï¿½quido
                 if (eventData.pointerDrag.GetComponentInChildren<Text>().name == "3")
                 {
                     GameManager.ml3 = int.Parse(eventData.pointerDrag.GetComponentInChildren<Text>().text);

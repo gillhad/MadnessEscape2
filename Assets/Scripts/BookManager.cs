@@ -40,7 +40,7 @@ public class BookManager : MonoBehaviour
             int count = 0;
             for (int i = 0; i < books.Count; i++)
             {
-                if (books[i].transform.position.x == huecos[i].transform.position.x && books[i].transform.position.y == huecos[i].transform.position.y)
+                if (books[i].GetComponent<RectTransform>().anchoredPosition == huecos[i].GetComponent<RectTransform>().anchoredPosition)
                 {
                     Debug.Log("libro"+ i +"en hueco");
                     Debug.Log(count);
@@ -55,13 +55,22 @@ public class BookManager : MonoBehaviour
             {
                 Debug.Log("solved");
                 solved = true;
-                gameManager.bookDrawerPuzzle();
+                gameManager.booksPuzzleSolved = true;
+                FindObjectOfType<ControllerAnimations>().openWall();
+                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
+                foreach (var item in buttons){
+            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
+        }
+                gameManager.drawerCanvas.SetActive(false);
+                gameManager.OnResume();
             }
+        }else{
+            FindObjectOfType<ControllerAnimations>().openWall();
         }
     }
 
     public void onReset() {
-        books[0].transform.position = position1;
+          books[0].transform.position = position1;
           books[1].transform.position = position2;
           books[2].transform.position = position3;
           books[3].transform.position = position4;

@@ -29,18 +29,16 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject segundaPista;
     public GameObject terceraPista;
 
-    public GameObject canvasdrawer;
+    public GameObject canvasArmarioDesordenado;
 
     public GameObject PistaLetras;
 
     public GameObject PistaArmario;
 
     public GameObject Sueño;
-    GameObject pista32;
-
-
-
-
+    public GameObject canvasPista32;
+    public GameObject canvasTabla;
+    public GameObject canvasArmarioElementos;
 
     bool drawerSolved = false;
 
@@ -64,11 +62,9 @@ public class PlayerManager : MonoBehaviourPun
         {
             PistaArmario = GameObject.FindGameObjectWithTag("PistaArmario22");
         }
-        if(pista32==null){
-            if(GameObject.Find("CanvasPistaSala3")!=null){
-                pista32 = GameObject.Find("CanvasPistaSala3");
-            }
-        }
+        if(GameObject.Find("CanvasPistaSala3")!=null){
+            canvasPista32.SetActive(true);
+        } 
 
     }
     void Update()
@@ -169,30 +165,38 @@ public class PlayerManager : MonoBehaviourPun
 
 
         ///SALA 3
-        if(other.gameObject.name == "Pista32"&& photonView.IsMine){
-            pista32.SetActive(true);
+        if(other.gameObject.name == "Pista32" && photonView.IsMine){
+           canvasPista32.SetActive(true);
         }
 
-        if (other.gameObject.name == "Papel prueba" && photonView.IsMine)
+        if (other.gameObject.name == "PapelPociones" && photonView.IsMine)
         {
-            gameManager.potionCanvas.SetActive(true);
+            Debug.Log("pantalla d pocions");
             gameManager.OnPause();
+            gameManager.potionCanvas.SetActive(true);
+            Debug.Log("se ha abirto corrctamnte l canvas");
+            
         }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
         {
             Debug.Log("tocas un objecto que interactúa");
-            gameManager.drawerCanvas.SetActive(true);
-            Cursor.visible = true;
             gameManager.OnPause();
+            canvasArmarioDesordenado.SetActive(true);
+            Cursor.visible = true;
+            
 
         }
 
-        if (other.gameObject.name == "Elementos" && photonView.IsMine && !gameManager.elementsPuzzleSolved)
+        if (other.gameObject.name == "ArmarioElementos" && photonView.IsMine && !gameManager.elementsPuzzleSolved)
         {
             gameManager.puzzleElementosCanvas.SetActive(true);
             Cursor.visible = true;
             gameManager.OnPause();
+        }
+
+        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+            canvasTabla.SetActive(true);
         }
 
     }
@@ -245,9 +249,14 @@ public class PlayerManager : MonoBehaviourPun
         {
             Sueño.SetActive(false);
         }
-        if(other.gameObject.name == "Pista32"&& photonView.IsMine){
-            pista32.SetActive(false);
+        if(other.gameObject.name == "Pista32" && photonView.IsMine){
+
+            canvasPista32.SetActive(false);
         }
+        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+            canvasTabla.SetActive(false);
+        }
+        
     }
 
     /*

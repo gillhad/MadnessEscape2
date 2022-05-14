@@ -18,6 +18,7 @@ TagManager:
   - PistaArmario22
   - Puerta21
   - botonLlamas
+  - DrawerCanvas
   layers:
   - Default
   - TransparentFX

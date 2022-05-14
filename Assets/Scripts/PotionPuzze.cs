@@ -12,7 +12,6 @@ public class PotionPuzze : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private RectTransform rectTransform;
     private Vector3 currentPos;
     private Vector3 velocity = Vector3.zero;
-    private Vector3 PotionPosition = new Vector3();
     public Text text;
 
     int currentMl;
@@ -28,12 +27,12 @@ public class PotionPuzze : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         Debug.Log("cambiar pocion");
         if (GetComponentInChildren<Text>().text != "0")
         {
-            Debug.Log("est· llena");
-            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/GreenPotion");
+            Debug.Log("cambia a imagen llena");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Full_Pot");
         }
         else {
-            Debug.Log("Est· vacia");
-            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPotion");
+            Debug.Log("cambia a imagen vac√≠a");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/EmptyPot");
         }
         //currentMl = int.Parse(rectTransform.name);
     }
