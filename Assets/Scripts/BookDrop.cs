@@ -11,6 +11,7 @@ public class BookDrop : MonoBehaviour, IDropHandler
         if(eventData.pointerDrag != null){
             Debug.Log("h djado l libro");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            GetComponent<AudioSource>().Play();
         }
 
 

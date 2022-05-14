@@ -33,6 +33,8 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light2.GetComponent<ParticleSystem>().Play();
+                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+
             }
 
         }

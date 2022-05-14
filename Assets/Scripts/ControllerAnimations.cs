@@ -9,6 +9,7 @@ public class ControllerAnimations : MonoBehaviour
     public void openWall()
     {
         wallAnimationController.SetBool("OpenWall", true);
+        GetComponent<AudioSource>().Play();
     }
     
 }
