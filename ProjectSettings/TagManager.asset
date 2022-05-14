@@ -17,6 +17,7 @@ TagManager:
   - EspadaB
   - PistaArmario22
   - Puerta21
+  - botonLlamas
   layers:
   - Default
   - TransparentFX

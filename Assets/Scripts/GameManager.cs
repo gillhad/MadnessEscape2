@@ -512,6 +512,11 @@ public class GameManager : MonoBehaviourPun
 
         //animación de abrir puerta secreta
         FindObjectOfType<ControllerAnimations>().openWall();
+        var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
+        foreach (var item in buttons){
+            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
+        }
+        
 
     }
 

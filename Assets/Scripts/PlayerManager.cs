@@ -36,7 +36,7 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject PistaArmario;
 
     public GameObject Sueño;
-
+    GameObject pista32;
 
 
 
@@ -63,6 +63,11 @@ public class PlayerManager : MonoBehaviourPun
         if (PistaArmario == null)
         {
             PistaArmario = GameObject.FindGameObjectWithTag("PistaArmario22");
+        }
+        if(pista32==null){
+            if(GameObject.Find("CanvasPistaSala3")!=null){
+                pista32 = GameObject.Find("CanvasPistaSala3");
+            }
         }
 
     }
@@ -164,6 +169,10 @@ public class PlayerManager : MonoBehaviourPun
 
 
         ///SALA 3
+        if(other.gameObject.name == "Pista32"&& photonView.IsMine){
+            pista32.SetActive(true);
+        }
+
         if (other.gameObject.name == "Papel prueba" && photonView.IsMine)
         {
             gameManager.potionCanvas.SetActive(true);
@@ -235,6 +244,9 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "Table_Wooden_02 (1)" && photonView.IsMine)
         {
             Sueño.SetActive(false);
+        }
+        if(other.gameObject.name == "Pista32"&& photonView.IsMine){
+            pista32.SetActive(false);
         }
     }
 

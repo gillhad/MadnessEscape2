@@ -5225,7 +5225,7 @@ MonoBehaviour:
   primeraPista: {fileID: 8090518008368493381}
   segundaPista: {fileID: 4005893753766518386}
   terceraPista: {fileID: 8202269227613333872}
-  canvasdrawer: {fileID: 0}
+  canvasdrawer: {fileID: 4693524794382941159}
   PistaLetras: {fileID: 7072122713959475641}
   PistaArmario: {fileID: 4563270499675426617}
   "Sue\xF1o": {fileID: 7581747726649060542}

@@ -43,18 +43,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Vector3 spawnPosition2 = new Vector3(8f, 2f, 25f);
         Vector3 spawnRoom3 = new Vector3(27f, 2f, 10f);
         Vector3 spawnRoom2 = new Vector3(22f, 2f, 10f);
+        Vector3 spanwRoom32 = new Vector3(27f,2f,25f);
 
         if (PhotonNetwork.InRoom)
         {
             if (PhotonNetwork.PlayerList.Length == 1)
             {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom2, Quaternion.identity);
+                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom3, Quaternion.identity);
             }
             else
             {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
+                PhotonNetwork.Instantiate("FPSPlayer", spanwRoom32, Quaternion.identity);
             }
-
         }
 
     }
