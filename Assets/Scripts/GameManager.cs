@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviourPun
     private bool checkRock = true;
 
     private bool checkLever = true;
+    private bool checkLeverMihai = true;
+
 
     public static bool door1CanBeOpened { get; set; } = false;
     public static bool door2CanBeOpened { get; set; } = false;
@@ -164,17 +166,19 @@ public class GameManager : MonoBehaviourPun
             }
         }
 
-        //checks para las palancas
-        if (lever1 != null)
-        {
-            lever1up = lever1.transform.localRotation.eulerAngles.x > 150;
-            lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
-            lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
-            lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
-            //---------
-            lever5up = lever5.transform.localRotation.eulerAngles.x > 150;
-            //-----------
-        }
+        lever1up = lever1.transform.localRotation.eulerAngles.x > 150;
+        lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
+        lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
+        lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
+        Debug.Log($"1 {lever1.transform.localRotation.eulerAngles.x > 150}");
+        Debug.Log($"2 {lever2.transform.localRotation.eulerAngles.x > 150}");
+        Debug.Log($"3 {lever3.transform.localRotation.eulerAngles.x > 150}");
+        Debug.Log($"4 {lever4.transform.localRotation.eulerAngles.x > 150}");
+
+        //---------
+        lever5up = lever5.transform.localRotation.eulerAngles.x > 150;
+        //-----------
+
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if (checkLever)
         {
@@ -183,10 +187,11 @@ public class GameManager : MonoBehaviourPun
                 //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
                 OpenClosetDoor();
                 checkLever = false;
+                Debug.Log("hola");
             }
         }
 //---------------------
-        if (checkLever)
+        if (checkLeverMihai)
         {
             if (!lever5up)
             {
@@ -420,6 +425,7 @@ public class GameManager : MonoBehaviourPun
             Receivers = ReceiverGroup.All
         };
         PhotonNetwork.RaiseEvent((byte)Events.OPEN_CLOSET_ROOM_1_EVENT, null, options, SendOptions.SendReliable);
+        Debug.Log("abrir puerta");
     }
 
     private void OnEnable()

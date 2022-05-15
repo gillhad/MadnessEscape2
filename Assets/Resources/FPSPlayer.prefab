@@ -7183,6 +7183,7 @@ MonoBehaviour:
   canvasPista32: {fileID: 242970696861746864}
   canvasTabla: {fileID: 2599737358175947600}
   canvasArmarioElementos: {fileID: 6499868546055944671}
+  HUD: {fileID: 0}
 --- !u!143 &7686074227043701388
 CharacterController:
   m_ObjectHideFlags: 0
