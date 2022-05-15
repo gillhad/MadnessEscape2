@@ -32,6 +32,9 @@ public class Candado : MonoBehaviour
         if (input == curPassword)
         {
             chestOpened = true;
+            keypadScreen = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
         }
 
         if (chestOpened)
@@ -115,6 +118,13 @@ public class Candado : MonoBehaviour
                 if (GUI.Button(new Rect(110, 350, 100, 100), "0"))
                 {
                     input = input + "0";
+                }
+                if (GUI.Button(new Rect(215, 350, 100, 100), "X"))
+                {
+                    keypadScreen = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Time.timeScale = 1f;
+
                 }
             }
         }

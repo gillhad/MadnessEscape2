@@ -306,9 +306,10 @@ public class GameManager : MonoBehaviourPun
         if (book1 == bookLockValue[0] && book2 == bookLockValue[1] && book3 == bookLockValue[2] && book4 == bookLockValue[3])
         {
             playerLockCanvas.SetActive(false);
-            playerCanvas.SetActive(true);
-            interactableText.text = "lo has conseguido!";
-            StartCoroutine(WaitFor2Sec(playerCanvas));
+            lock1CanBeSeen = false;
+            Cursor.visible = false;
+            Time.timeScale = 1;
+            PlayerMovement.speed = 0.15f;
             OpenSecondRoomChest();
         }
     }
@@ -358,6 +359,7 @@ public class GameManager : MonoBehaviourPun
     {
         gameObject.SetActive(false);
         Time.timeScale = 1;
+        PlayerMovement.speed = 0.15f;
     }
 
 
