@@ -11,6 +11,8 @@ namespace MadnessEscape2.Assets.Scripts
         CAN_ROTATE_STONES = 5,
         OPEN_CLOSET2_ROOM_1_EVENT = 6,
         OPEN_CHEST2_ROOM_2 = 7,
-
+        
+        //
+        OPEN_WALL = 8,
     }
 }

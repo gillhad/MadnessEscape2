@@ -488,7 +488,7 @@ public class GameManager : MonoBehaviourPun
     }
 
     void puzzleBooks(){
-        if(booksPuzzleSolved){
+        if(booksPuzzleSolved){    
             Debug.Log("s ha solucionado");
             FindObjectOfType<ControllerAnimations>().openWall();
                  var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
@@ -499,6 +499,13 @@ public class GameManager : MonoBehaviourPun
                 OnResume();
         }
     }
+
+     private void OpeanWallCheck(EventData obj){
+        if(obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
+        {
+            booksPuzzleSolved =  true;
+        }
+     }
 
     void PuzzleWater()
     {
