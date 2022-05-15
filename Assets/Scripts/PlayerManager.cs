@@ -44,6 +44,7 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasPista32;
     public GameObject canvasTabla;
     public GameObject canvasArmarioElementos;
+    public GameObject HUD;
 
     bool drawerSolved = false;
 
@@ -61,6 +62,7 @@ public class PlayerManager : MonoBehaviourPun
 
     private void Start()
     {
+        HUD = GameObject.Find("HUD");
         if (gameManager == null)
         {
             gameManager = gameManager = FindObjectOfType<GameManager>();
@@ -102,6 +104,8 @@ public class PlayerManager : MonoBehaviourPun
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            PlayerMovement.speed = 0f;
+            Time.timeScale = 0;
             playerLockMenu.SetActive(true);
         }
 
@@ -110,6 +114,12 @@ public class PlayerManager : MonoBehaviourPun
             Debug.Log("tocando puerta");
             GameObject door = other.gameObject;
             gameManager.OpenDoor(door);
+        }
+
+        if (other.gameObject.name == "Valve_main")
+        {
+            HUD.SetActive(false);
+            Cursor.lockState = CursorLockMode.None;
         }
 
 
@@ -240,6 +250,11 @@ public class PlayerManager : MonoBehaviourPun
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = false;
             playerLockMenu.SetActive(false);
+        }
+        if (other.gameObject.name == "Valve_main")
+        {
+            HUD.SetActive(true);
+            Cursor.lockState = CursorLockMode.Locked;
         }
         if (other.gameObject.name == "Primera Pista" && photonView.IsMine)
         {
