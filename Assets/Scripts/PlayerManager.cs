@@ -42,7 +42,7 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasArmarioElementos;
 
     bool drawerSolved = false;
-
+    static public bool potionUnlocked = false;
     
 
 
@@ -178,7 +178,7 @@ public class PlayerManager : MonoBehaviourPun
         }
 
         if(gameManager.elementsPuzzleSolved){
-        if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
+        if (other.gameObject.name == "PapelPociones" && photonView.IsMine && potionUnlocked)
         {
             Debug.Log("pantalla d pocions");
             gameManager.OnPause();
@@ -192,7 +192,7 @@ public class PlayerManager : MonoBehaviourPun
         {
             Debug.Log("tocas un objecto que interactúa");
             gameManager.OnPause();
-            canvasArmarioDesordenado.SetActive(true);
+            gameManager.drawerCanvas.SetActive(true);
             Cursor.visible = true;
             
 

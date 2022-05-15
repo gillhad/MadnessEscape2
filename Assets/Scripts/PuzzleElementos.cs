@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+    using Photon.Pun;
+using Photon.Realtime;
+using MadnessEscape2.Assets.Scripts;
+using ExitGames.Client.Photon;
 
 public class PuzzleElementos : MonoBehaviour
 {
@@ -20,6 +24,8 @@ public class PuzzleElementos : MonoBehaviour
     public InputField vati5;
     public InputField vati6;
 
+
+
     private void Start()
     {
         if (gameManager == null)
@@ -35,7 +41,18 @@ public class PuzzleElementos : MonoBehaviour
             && vati1.text == "23" && vati2.text == "85" && vati3.text == "53" && vati4.text == "20" && vati5.text == "7" && vati6.text == "8") {
             Debug.Log("puzzle solved");
             gameManager.elementsPuzzleSolved = true;
+                Debug.Log("deberi cerrarse");
+                GameObject.Find("FraseElementos").SetActive(false);
+                gameManager.OnResume();
+                RaiseEventOptions options = new RaiseEventOptions()
+            {
+                CachingOption = EventCaching.DoNotCache,
+                Receivers = ReceiverGroup.All
+            };
+            PhotonNetwork.RaiseEvent((byte)Events.ELEMENT_SOLVED, null, options, SendOptions.SendReliable);
+        }
+            
         }
 
     }
-}
+

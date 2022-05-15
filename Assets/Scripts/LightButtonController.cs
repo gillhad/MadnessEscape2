@@ -18,7 +18,7 @@ public class LightButtonController : MonoBehaviour
     {
         lightPuzzleController = FindObjectOfType<LightPuzzleController>();
     }
-    float btnDown = 0.5f;
+    float btnDown = 0.1f;
 
     private void OnMouseDown()
     {

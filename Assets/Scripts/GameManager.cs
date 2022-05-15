@@ -233,11 +233,6 @@ public class GameManager : MonoBehaviourPun
         }
 
 
-        //Si elo canvas de elementos está activa revisa que se solucione el problema
-        if (puzzleElementosCanvas.active){
-            puzzleElementos();
-        }
-
        
 
        
@@ -487,10 +482,13 @@ public class GameManager : MonoBehaviourPun
         if(obj.Code == (uint)Events.OPEN_WALL){       
                     
             FindObjectOfType<ControllerAnimations>().openWall();
-                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
-                foreach (var item in buttons){
-            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
-        }             
+                
+        }
+
+        if(obj.Code == (uint)Events.ELEMENT_SOLVED){       
+                    
+           PlayerManager.potionUnlocked = true;
+           Debug.Log(PlayerManager.potionUnlocked);                
         }
         
         if(obj.Code == (uint)Events.LIGHT_SOLVED){
@@ -513,7 +511,26 @@ public class GameManager : MonoBehaviourPun
         }
     }
 
-    
+    public void bookSolved(){
+                booksPuzzleSolved = true;  
+                Debug.Log(GameObject.Find("CanvasArmario").active);
+                    if(GameObject.Find("CanvasArmario").active){
+                         Debug.Log("deberia cerrarse");                    
+                    Debug.Log(drawerCanvas);    
+                        OnResume();
+                    GameObject.Find("CanvasArmario").SetActive(false);  
+                    }             
+                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
+                foreach (var item in buttons){
+            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
+        }             
+                RaiseEventOptions options = new RaiseEventOptions()
+                {
+                    CachingOption = EventCaching.DoNotCache,
+                    Receivers = ReceiverGroup.All
+                };
+                PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);            
+    }
 
      
 
@@ -542,23 +559,6 @@ public class GameManager : MonoBehaviourPun
     }
 
     
-
-
-    void puzzleElementos()
-    {
-
-        if (elementsPuzzleSolved)
-        {
-            Debug.Log("recuperado");
-            StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
-            OnResume();
-            
-        }
-    }
-
-    //Si solucionamos el puzzle de lucees lanza un mensaje
-    
-
     void openFinalDoor(){
         var doors = FindObjectsOfType<FinalDoorController>();
         Debug.Log(doors.Length);

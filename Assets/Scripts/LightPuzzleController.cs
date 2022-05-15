@@ -48,13 +48,13 @@ public class LightPuzzleController : MonoBehaviour
                     Receivers = ReceiverGroup.All
                 };
               PhotonNetwork.RaiseEvent((byte)Events.LIGHT_SOLVED, null, options, SendOptions.SendReliable);  
+              PhotonNetwork.RaiseEvent((byte)Events.OPEN_FINAL_DOOR, null, options, SendOptions.SendReliable);
             Debug.Log("done");
         }
 
 
         if (btnpress1 && btnpress2 && btnpress3 && btnpress4 && btnpress5 && btnpress6)
         {
-
                 Debug.Log("se apretaron todos los botones");
                 btnpress1 = false;
                 btnpress2 = false;
@@ -63,7 +63,9 @@ public class LightPuzzleController : MonoBehaviour
                 btnpress5 = false;
                 btnpress6 = false;
                 button.ForEach(item => {
+                    Debug.Log(item.transform.position.y);
                     item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + btnDown, item.transform.position.z);
+                    Debug.Log(item.transform.position.y);
                 });
                 
             

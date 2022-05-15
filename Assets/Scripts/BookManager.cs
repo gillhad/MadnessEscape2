@@ -59,16 +59,7 @@ public class BookManager : MonoBehaviourPun
             {
                 Debug.Log("solved");
                 solved = true;
-                gameManager.booksPuzzleSolved = true;
-                gameManager.drawerCanvas.SetActive(false);
-                gameManager.OnResume();
-                RaiseEventOptions options = new RaiseEventOptions()
-                {
-                    CachingOption = EventCaching.DoNotCache,
-                    Receivers = ReceiverGroup.All
-                };
-                PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);
-                
+                gameManager.bookSolved();
             }
         }
     }
