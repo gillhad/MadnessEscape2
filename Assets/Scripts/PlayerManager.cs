@@ -85,6 +85,10 @@ public class PlayerManager : MonoBehaviourPun
             return;
         }
 
+        if(potionUnlocked){
+            Debug.Log("deberia abrirse las pociones");
+        }
+
     }
 
     //prueba para mover la c�mara cuando pase algo **pendiente de revisar**
@@ -183,11 +187,12 @@ public class PlayerManager : MonoBehaviourPun
             canvasPista32.SetActive(true);
         }
 
-        if (gameManager.elementsPuzzleSolved)
+        if (potionUnlocked)
         {
-            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
+            Debug.Log("va, abre las pociones");
+            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && potionUnlocked)
             {
-                Debug.Log("pantalla d pocions");
+                Debug.Log("pantalla de pociones");
                 gameManager.OnPause();
                 gameManager.potionCanvas.SetActive(true);
                 Debug.Log("se ha abirto corrctamnte l canvas");

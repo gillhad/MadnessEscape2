@@ -62,6 +62,12 @@ public class LightPuzzleController : MonoBehaviour
                 btnpress4 = false;
                 btnpress5 = false;
                 btnpress6 = false;
+                light1.GetComponent<ParticleSystem>().Stop();
+                light2.GetComponent<ParticleSystem>().Stop();
+                light3.GetComponent<ParticleSystem>().Stop();
+                light4.GetComponent<ParticleSystem>().Stop();
+                light5.GetComponent<ParticleSystem>().Stop();
+                light6.GetComponent<ParticleSystem>().Stop();
                 button.ForEach(item => {
                     Debug.Log(item.transform.position.y);
                     item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + btnDown, item.transform.position.z);

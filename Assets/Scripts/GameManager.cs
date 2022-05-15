@@ -232,7 +232,9 @@ public class GameManager : MonoBehaviourPun
             PuzzleWater();
         }
 
-
+        if(potionReceived && lightPuzzleSolved){
+            openFinalDoor();
+        }
        
 
        
@@ -487,36 +489,33 @@ public class GameManager : MonoBehaviourPun
 
         if(obj.Code == (uint)Events.ELEMENT_SOLVED){       
                     
-           PlayerManager.potionUnlocked = true;
-           Debug.Log(PlayerManager.potionUnlocked);                
+           PlayerManager.potionUnlocked = true;           
         }
         
         if(obj.Code == (uint)Events.LIGHT_SOLVED){
             lightPuzzleSolved = true;
         }
+        if(obj.Code == (uint)Events.POTION_SOLVED){
+            potionReceived = true;
+        }
+
         if(obj.Code == (uint)Events.OPEN_FINAL_DOOR){
             if (lightPuzzleSolved && potionReceived)
             {
-                printMessageOnScreen("Rápido, ya he abierto la puerta!");
                 openFinalDoor();
             }
             else if(!lightPuzzleSolved && potionReceived)
             {
-                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
             }
             else if(lightPuzzleSolved && !potionReceived)
             {
-                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
             }
         }
     }
 
     public void bookSolved(){
                 booksPuzzleSolved = true;  
-                Debug.Log(GameObject.Find("CanvasArmario").active);
-                    if(GameObject.Find("CanvasArmario").active){
-                         Debug.Log("deberia cerrarse");                    
-                    Debug.Log(drawerCanvas);    
+                    if(GameObject.Find("CanvasArmario").active){ 
                         OnResume();
                     GameObject.Find("CanvasArmario").SetActive(false);  
                     }             
@@ -564,6 +563,7 @@ public class GameManager : MonoBehaviourPun
         Debug.Log(doors.Length);
         foreach (var item in doors)
         {
+            Debug.Log(item.transform.position);
             item.openDoor();
         }
     }
