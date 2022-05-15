@@ -8,6 +8,7 @@ using TMPro;
 using Photon.Realtime;
 using ExitGames.Client.Photon;
 
+
 public class PlayerManager : MonoBehaviourPun
 {
     public PhotonView photonView;
@@ -41,6 +42,8 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasArmarioElementos;
 
     bool drawerSolved = false;
+
+    
 
 
 
@@ -160,6 +163,11 @@ public class PlayerManager : MonoBehaviourPun
         {
             Sueño.SetActive(true);
         }
+        if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
+        {
+            Candado.onTrigger = true;
+        }
+
 
         //----------------------------------------------
 
@@ -248,6 +256,10 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "Table_Wooden_02 (1)" && photonView.IsMine)
         {
             Sueño.SetActive(false);
+        }
+        if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
+        {
+            Candado.onTrigger = true;
         }
         if(other.gameObject.name == "Pista32" && photonView.IsMine){
 

@@ -6,7 +6,7 @@ public class Candado : MonoBehaviour
 {
     public string curPassword = "231";
     public string input;
-    public bool onTrigger = false;
+    public static bool onTrigger = false;
     public bool chestOpened;
     public bool keypadScreen;
     public Transform chestHinge;
@@ -14,7 +14,7 @@ public class Candado : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        onTrigger = true;
+       // onTrigger = true;
     }
 
     void OnTriggerExit(Collider other)
@@ -22,6 +22,7 @@ public class Candado : MonoBehaviour
         onTrigger = false;
         keypadScreen = false;
         input = "";
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

@@ -489,6 +489,8 @@ public class GameManager : MonoBehaviourPun
 
             }
         }
+
+       
     }
 
     void puzzleBooks(){
