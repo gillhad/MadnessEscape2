@@ -61,6 +61,7 @@ public class BookManager : MonoBehaviourPun
                 solved = true;
                 gameManager.booksPuzzleSolved = true;
                 gameManager.drawerCanvas.SetActive(false);
+                gameManager.OnResume();
                 RaiseEventOptions options = new RaiseEventOptions()
                 {
                     CachingOption = EventCaching.DoNotCache,

@@ -46,9 +46,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Vector3 spawnRoom2 = new Vector3(22f, 2f, 10f);
         Vector3 spawnRoom32 = new Vector3(27f,2f,25f);
         Vector3[] positions = new [] {spawnPosition1,spawnPosition2};
-        int position = 0;
+        
         if (PhotonNetwork.InRoom)
-        Debug.Log(PhotonNetwork.PlayerList.Length);
         {
             if(PhotonNetwork.IsMasterClient){
                 PhotonNetwork.Instantiate("FPSPlayer", spawnPosition1, Quaternion.identity);
@@ -56,14 +55,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
             }
             
-            // if (PhotonNetwork.PlayerList.Length == 1)
-            // {
-            //     PhotonNetwork.Instantiate("FPSPlayer", spawnPosition1, Quaternion.identity);
-            // }
-            // else
-            // {
-            //     PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
-            // }
+           
         }
 
     }

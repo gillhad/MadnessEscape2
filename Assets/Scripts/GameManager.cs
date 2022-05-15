@@ -484,20 +484,15 @@ public class GameManager : MonoBehaviourPun
             }
         }
 
-        if(obj.Code == (uint)Events.OPEN_WALL){
-             Debug.Log("s ha solucionado");
-
+        if(obj.Code == (uint)Events.OPEN_WALL){       
+                    
             FindObjectOfType<ControllerAnimations>().openWall();
                  var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
                 foreach (var item in buttons){
             item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
+        }             
         }
-                
-                OnResume();
-        }
-        if(obj.Code == (uint)Events.OPEN_WALL){
-            potionReceived = true;
-        }
+        
         if(obj.Code == (uint)Events.LIGHT_SOLVED){
             lightPuzzleSolved = true;
         }
