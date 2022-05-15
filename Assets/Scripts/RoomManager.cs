@@ -49,11 +49,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.PlayerList.Length == 1)
             {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition1, Quaternion.identity);
+                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom3, Quaternion.identity);
             }
             else
             {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
+                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom32, Quaternion.identity);
             }
         }
 
