@@ -14,5 +14,8 @@ namespace MadnessEscape2.Assets.Scripts
         USE_GRAVITY_ON_SWORD = 21,
         DESTROY_DOORS_SECOND_ROOMS = 22,
 
+        
+        //
+        OPEN_WALL = 8,
     }
 }

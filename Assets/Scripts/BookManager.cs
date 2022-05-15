@@ -1,8 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using MadnessEscape2.Assets.Scripts;
+using ExitGames.Client.Photon;
 
-public class BookManager : MonoBehaviour
+public class BookManager : MonoBehaviourPun
 {
     public List<GameObject> books;
     public List<GameObject> huecos;
@@ -56,6 +60,12 @@ public class BookManager : MonoBehaviour
                 Debug.Log("solved");
                 solved = true;
                 gameManager.booksPuzzleSolved = true;
+                RaiseEventOptions options = new RaiseEventOptions()
+                {
+                    CachingOption = EventCaching.DoNotCache,
+                    Receivers = ReceiverGroup.All
+                };
+                PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);
                 
             }
         }else{
