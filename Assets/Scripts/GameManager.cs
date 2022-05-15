@@ -234,8 +234,7 @@ public class GameManager : MonoBehaviourPun
 
 
         //Si elo canvas de elementos está activa revisa que se solucione el problema
-        if (puzzleElementosCanvas.active)
-        {
+        if (puzzleElementosCanvas.active){
             puzzleElementos();
         }
 
@@ -243,10 +242,7 @@ public class GameManager : MonoBehaviourPun
            puzzleBooks();
        }
 
-       if(potionReceived && lightPuzzleSolved){
-           Debug.Log("s abre la purta");
-           openFinalDoor();
-       }
+       
 
 
     }
