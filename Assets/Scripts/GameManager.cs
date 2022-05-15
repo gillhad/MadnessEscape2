@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Start()
     {
-        GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, Random.Range(0, 360));
+        GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, 45f);
         GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360));
         GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, Random.Range(0, 360));
         lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
@@ -170,10 +170,6 @@ public class GameManager : MonoBehaviourPun
         lever2up = lever2.transform.localRotation.eulerAngles.x > 150;
         lever3up = lever3.transform.localRotation.eulerAngles.x > 150;
         lever4up = lever4.transform.localRotation.eulerAngles.x > 150;
-        Debug.Log($"1 {lever1.transform.localRotation.eulerAngles.x > 150}");
-        Debug.Log($"2 {lever2.transform.localRotation.eulerAngles.x > 150}");
-        Debug.Log($"3 {lever3.transform.localRotation.eulerAngles.x > 150}");
-        Debug.Log($"4 {lever4.transform.localRotation.eulerAngles.x > 150}");
 
         //---------
         lever5up = lever5.transform.localRotation.eulerAngles.x > 150;
@@ -182,6 +178,11 @@ public class GameManager : MonoBehaviourPun
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if (checkLever)
         {
+            Debug.Log("checkear lever");
+            Debug.Log($"1 {lever1.transform.localRotation.eulerAngles.x > 150}");
+            Debug.Log($"2 {lever2.transform.localRotation.eulerAngles.x > 150}");
+            Debug.Log($"3 {lever3.transform.localRotation.eulerAngles.x > 150}");
+            Debug.Log($"4 {lever4.transform.localRotation.eulerAngles.x > 150}");
             if (lever1up && !lever2up && !lever3up && lever4up)
             {
                 //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
@@ -191,14 +192,14 @@ public class GameManager : MonoBehaviourPun
             }
         }
 //---------------------
-        if (checkLeverMihai)
+        /*if (checkLeverMihai)
         {
             if (!lever5up)
             {
                 
                 checkLever = false;
             }
-        }
+        }*/
 //-------------------------       
 
         if(checkRock) checkRocks();
