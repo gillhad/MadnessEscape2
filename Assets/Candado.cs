@@ -11,6 +11,8 @@ public class Candado : MonoBehaviour
     public bool keypadScreen;
     public Transform chestHinge;
 
+    public GameObject key;
+
 
     void OnTriggerEnter(Collider other)
     {
@@ -37,6 +39,7 @@ public class Candado : MonoBehaviour
             Time.timeScale = 1f;
             var newRot = Quaternion.RotateTowards(chestHinge.rotation, Quaternion.Euler(-180.0f, 0.0f, 0.0f), Time.deltaTime * 250);
             chestHinge.rotation = newRot;
+            key.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 
