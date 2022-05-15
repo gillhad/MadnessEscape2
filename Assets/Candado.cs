@@ -41,7 +41,7 @@ public class Candado : MonoBehaviour
             chestHinge.rotation = newRot;
             key.SetActive(true);
             key.GetComponent<Rigidbody>().useGravity = true;
-
+            
         }
     }
 
