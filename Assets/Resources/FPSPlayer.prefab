@@ -7163,6 +7163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24cdedf79bfee2e4d8794253cc43f9a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cd: {fileID: 0}
   photonView: {fileID: 6224209913234343608}
   playerCamera: {fileID: 2743965817572682060}
   interactableText: {fileID: 7581138939504267876}

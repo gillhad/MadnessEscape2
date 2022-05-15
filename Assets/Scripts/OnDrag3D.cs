@@ -13,6 +13,11 @@ public class OnDrag3D : MonoBehaviourPun
     private Vector3 mOffset;
     float mZcord;
 
+  //  GameObject player = GameObject.Find("FPSPlayer");
+
+    public float distance;
+    
+
 
 
     
@@ -25,6 +30,14 @@ public class OnDrag3D : MonoBehaviourPun
 
     void OnMouseDown()
     {
+      //  distance = Vector3.Distance(player.transform.position, transform.position);
+        
+            
+       /* if (distance < )
+        {
+            
+        }*/
+
         mZcord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         mOffset = gameObject.transform.position - GetMouseWorldPos();
        
