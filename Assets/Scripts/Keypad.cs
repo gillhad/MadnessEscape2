@@ -5,24 +5,24 @@ public class Keypad : MonoBehaviour
 {
 
     public string curPassword = "36667777";
-    public string input;
-    public bool onTrigger;
-    public bool closetDown;
-    public bool keypadScreen;
+    public static string input;
+    public static bool onTrigger;
+    public static bool closetDown;
+    public static bool keypadScreen;
     public Transform closetHinge;
 
 
     void OnTriggerEnter(Collider other)
     {
-        onTrigger = true;
+       // onTrigger = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        onTrigger = false;
-        keypadScreen = false;
-        input = "";
-        Cursor.lockState = CursorLockMode.Locked;
+       // onTrigger = false;
+       // keypadScreen = false;
+       // input = "";
+       // Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -50,6 +50,7 @@ public class Keypad : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     Cursor.lockState = CursorLockMode.None;
+                    Time.timeScale = 0f;
                     keypadScreen = true;
                     onTrigger = false;
                 }

@@ -11,6 +11,9 @@ using ExitGames.Client.Photon;
 
 public class PlayerManager : MonoBehaviourPun
 {
+    PlayfabManager pfm;
+
+    public Countdown cd;
     public PhotonView photonView;
     public GameObject playerCamera;
     private GameManager gameManager;
@@ -35,6 +38,7 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject PistaLetras;
 
     public GameObject PistaArmario;
+    public GameObject PistaJarrones;
 
     public GameObject Sueño;
     public GameObject canvasPista32;
@@ -42,8 +46,9 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasArmarioElementos;
 
     bool drawerSolved = false;
+
     static public bool potionUnlocked = false;
-    
+
 
 
 
@@ -65,9 +70,10 @@ public class PlayerManager : MonoBehaviourPun
         {
             PistaArmario = GameObject.FindGameObjectWithTag("PistaArmario22");
         }
-        if(GameObject.Find("CanvasPistaSala3")!=null){
+        if (GameObject.Find("CanvasPistaSala3") != null)
+        {
             canvasPista32.SetActive(true);
-        } 
+        }
 
     }
     void Update()
@@ -92,16 +98,6 @@ public class PlayerManager : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-
-        //Ejemplo de collider
-        if (other.gameObject.name == "ArmarioInteractua" && photonView.IsMine) //nombre del objeto con el que interactuamos
-        {
-            interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
-            interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
-
-            StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
-        }
-
         if (other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -163,9 +159,18 @@ public class PlayerManager : MonoBehaviourPun
         {
             Sueño.SetActive(true);
         }
+        if (other.gameObject.name == "Paperrr" && photonView.IsMine)
+        {
+            PistaJarrones.SetActive(true);
+        }
+
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
             Candado.onTrigger = true;
+        }
+        if (other.gameObject.name == "Paper_04" && photonView.IsMine)
+        {
+            Keypad.onTrigger = true;
         }
 
 
@@ -173,19 +178,21 @@ public class PlayerManager : MonoBehaviourPun
 
 
         ///SALA 3
-        if(other.gameObject.name == "Pista32" && photonView.IsMine){
-           canvasPista32.SetActive(true);
+        if (other.gameObject.name == "Pista32" && photonView.IsMine)
+        {
+            canvasPista32.SetActive(true);
         }
 
-        if(gameManager.elementsPuzzleSolved){
-        if (other.gameObject.name == "PapelPociones" && photonView.IsMine && potionUnlocked)
+        if (gameManager.elementsPuzzleSolved)
         {
-            Debug.Log("pantalla d pocions");
-            gameManager.OnPause();
-            gameManager.potionCanvas.SetActive(true);
-            Debug.Log("se ha abirto corrctamnte l canvas");
-            
-        }
+            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
+            {
+                Debug.Log("pantalla d pocions");
+                gameManager.OnPause();
+                gameManager.potionCanvas.SetActive(true);
+                Debug.Log("se ha abirto corrctamnte l canvas");
+
+            }
         }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
@@ -194,7 +201,7 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OnPause();
             gameManager.drawerCanvas.SetActive(true);
             Cursor.visible = true;
-            
+
 
         }
 
@@ -205,12 +212,16 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OnPause();
         }
 
-        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+        if (other.gameObject.name == "TablaPer" && photonView.IsMine)
+        {
             canvasTabla.SetActive(true);
         }
 
-        if(other.gameObject.name == "The End" ){
+        if (other.gameObject.name == "The End")
+        {
             //todo final juego
+             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+             pfm.SendLeaderboard(cd.minutes, cd.seconds);
         }
 
     }
@@ -265,20 +276,42 @@ public class PlayerManager : MonoBehaviourPun
         }
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
-            Candado.onTrigger = true;
+            Candado.onTrigger = false;
         }
-        if(other.gameObject.name == "Pista32" && photonView.IsMine){
+        if (other.gameObject.name == "Pista32" && photonView.IsMine)
+        {
 
             canvasPista32.SetActive(false);
         }
-        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+        if (other.gameObject.name == "TablaPer" && photonView.IsMine)
+        {
             canvasTabla.SetActive(false);
         }
+        if (other.gameObject.name == "Paperrr" && photonView.IsMine)
+        {
+            PistaJarrones.SetActive(false);
+        }
 
-        if(other.gameObject.name== "The End"){
+        if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
+        {
+            Candado.onTrigger = false;
+            Candado.keypadScreen = false;
+            Candado.input = "";
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (other.gameObject.name == "Paper_04" && photonView.IsMine)
+        {
+            Keypad.onTrigger = false;
+            Keypad.keypadScreen = false;
+            Keypad.input = "";
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        if (other.gameObject.name == "The End")
+        {
             ///mostrar canvas d final y gaurdar datos partida
         }
-        
+
     }
 
     /*

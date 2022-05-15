@@ -23,6 +23,7 @@ public class InsideDoor : MonoBehaviour
             Debug.Log("llave");
             var newRot = Quaternion.RotateTowards(insideDoor.rotation, Quaternion.Euler(0.0f, 265.0f, 0.0f), Time.deltaTime * 250);
             insideDoor.rotation = newRot;
+            key21.SetActive(false);
         }
     }
 }
