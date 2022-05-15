@@ -167,10 +167,12 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
             Candado.onTrigger = true;
+            
         }
         if (other.gameObject.name == "Paper_04" && photonView.IsMine)
         {
             Keypad.onTrigger = true;
+            
         }
 
 

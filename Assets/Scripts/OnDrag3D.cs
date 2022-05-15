@@ -7,40 +7,40 @@ using UnityEngine.UI;
 using Photon.Pun;
 
 public class OnDrag3D : MonoBehaviourPun
-   // ,IBeginDragHandler, IEndDragHandler, IDragHandler
+// ,IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-  
+
     private Vector3 mOffset;
     float mZcord;
 
-  //  GameObject player = GameObject.Find("FPSPlayer");
+    GameObject player;
 
     public float distance;
-    
+    public float maxDistance = 5f;
 
 
 
-    
-    [SerializeField] 
+
+    [SerializeField]
     public float mouseSensibility = 50;
-  
 
     
-  
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+        
+        
+    }
+
 
     void OnMouseDown()
     {
-      //  distance = Vector3.Distance(player.transform.position, transform.position);
-        
-            
-       /* if (distance < )
-        {
-            
-        }*/
+
+        distance = Vector3.Distance(player.transform.position, transform.position);
 
         mZcord = Camera.main.WorldToScreenPoint(gameObject.transform.position).z;
         mOffset = gameObject.transform.position - GetMouseWorldPos();
-       
+
 
     }
 
@@ -55,9 +55,15 @@ public class OnDrag3D : MonoBehaviourPun
 
     void OnMouseDrag()
     {
-        transform.position = GetMouseWorldPos()
+
+        if (distance < maxDistance)
+        {
+            transform.position = GetMouseWorldPos()
             + mOffset;
             ;
+
+        }
+
 
     }
 

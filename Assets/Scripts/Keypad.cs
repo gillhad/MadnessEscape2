@@ -14,15 +14,15 @@ public class Keypad : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-       // onTrigger = true;
+        //  onTrigger = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-       // onTrigger = false;
-       // keypadScreen = false;
-       // input = "";
-       // Cursor.lockState = CursorLockMode.Locked;
+        //  onTrigger = false;
+        //  keypadScreen = false;
+        //  input = "";
+        //  Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -30,6 +30,9 @@ public class Keypad : MonoBehaviour
         if (input == curPassword)
         {
             closetDown = true;
+            keypadScreen = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1f;
         }
 
         if (closetDown)
@@ -109,6 +112,13 @@ public class Keypad : MonoBehaviour
                 if (GUI.Button(new Rect(110, 350, 100, 100), "0"))
                 {
                     input = input + "0";
+                }
+                if (GUI.Button(new Rect(215, 350, 100, 100), "X"))
+                {
+                    keypadScreen = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Time.timeScale = 1f;
+
                 }
             }
         }
