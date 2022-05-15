@@ -51,17 +51,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.InRoom)
         {
 
-            if(PhotonNetwork.IsMasterClient){
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition1, Quaternion.identity);
+            }
+            else
+            {
                 PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
-            }else{
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
-
-
-
-
+            }
 
         }
-
-    }
     }
 }
