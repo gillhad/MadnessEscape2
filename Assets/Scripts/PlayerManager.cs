@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviourPun
 
     bool drawerSolved = false;
 
-    
+
 
 
 
@@ -65,9 +65,10 @@ public class PlayerManager : MonoBehaviourPun
         {
             PistaArmario = GameObject.FindGameObjectWithTag("PistaArmario22");
         }
-        if(GameObject.Find("CanvasPistaSala3")!=null){
+        if (GameObject.Find("CanvasPistaSala3") != null)
+        {
             canvasPista32.SetActive(true);
-        } 
+        }
 
     }
     void Update()
@@ -167,25 +168,31 @@ public class PlayerManager : MonoBehaviourPun
         {
             Candado.onTrigger = true;
         }
+        if (other.gameObject.name == "Paper_04" && photonView.IsMine)
+        {
+            Keypad.onTrigger = true;
+        }
 
 
         //----------------------------------------------
 
 
         ///SALA 3
-        if(other.gameObject.name == "Pista32" && photonView.IsMine){
-           canvasPista32.SetActive(true);
+        if (other.gameObject.name == "Pista32" && photonView.IsMine)
+        {
+            canvasPista32.SetActive(true);
         }
 
-        if(gameManager.elementsPuzzleSolved){
-        if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
+        if (gameManager.elementsPuzzleSolved)
         {
-            Debug.Log("pantalla d pocions");
-            gameManager.OnPause();
-            gameManager.potionCanvas.SetActive(true);
-            Debug.Log("se ha abirto corrctamnte l canvas");
-            
-        }
+            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
+            {
+                Debug.Log("pantalla d pocions");
+                gameManager.OnPause();
+                gameManager.potionCanvas.SetActive(true);
+                Debug.Log("se ha abirto corrctamnte l canvas");
+
+            }
         }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
@@ -194,7 +201,7 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OnPause();
             canvasArmarioDesordenado.SetActive(true);
             Cursor.visible = true;
-            
+
 
         }
 
@@ -205,11 +212,13 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OnPause();
         }
 
-        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+        if (other.gameObject.name == "TablaPer" && photonView.IsMine)
+        {
             canvasTabla.SetActive(true);
         }
 
-        if(other.gameObject.name == "The End" ){
+        if (other.gameObject.name == "The End")
+        {
             //todo final juego
         }
 
@@ -265,20 +274,38 @@ public class PlayerManager : MonoBehaviourPun
         }
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
-            Candado.onTrigger = true;
+            Candado.onTrigger = false;
         }
-        if(other.gameObject.name == "Pista32" && photonView.IsMine){
+        if (other.gameObject.name == "Pista32" && photonView.IsMine)
+        {
 
             canvasPista32.SetActive(false);
         }
-        if(other.gameObject.name == "TablaPer" && photonView.IsMine){
+        if (other.gameObject.name == "TablaPer" && photonView.IsMine)
+        {
             canvasTabla.SetActive(false);
         }
 
-        if(other.gameObject.name== "The End"){
+        if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
+        {
+            Candado.onTrigger = false;
+            Candado.keypadScreen = false;
+            Candado.input = "";
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        if (other.gameObject.name == "Paper_04" && photonView.IsMine)
+        {
+            Keypad.onTrigger = false;
+            Keypad.keypadScreen = false;
+            Keypad.input = "";
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        if (other.gameObject.name == "The End")
+        {
             ///mostrar canvas d final y gaurdar datos partida
         }
-        
+
     }
 
     /*

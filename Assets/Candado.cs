@@ -5,10 +5,10 @@ using UnityEngine;
 public class Candado : MonoBehaviour
 {
     public string curPassword = "231";
-    public string input;
+    public static string input;
     public static bool onTrigger = false;
-    public bool chestOpened;
-    public bool keypadScreen;
+    public static bool chestOpened;
+    public static bool keypadScreen;
     public Transform chestHinge;
 
     public GameObject key;
@@ -21,10 +21,10 @@ public class Candado : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        onTrigger = false;
-        keypadScreen = false;
-        input = "";
-        Cursor.lockState = CursorLockMode.Locked;
+       // onTrigger = false;
+       // keypadScreen = false;
+       // input = "";
+       // Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -39,7 +39,9 @@ public class Candado : MonoBehaviour
             Time.timeScale = 1f;
             var newRot = Quaternion.RotateTowards(chestHinge.rotation, Quaternion.Euler(-180.0f, 0.0f, 0.0f), Time.deltaTime * 250);
             chestHinge.rotation = newRot;
+            key.SetActive(true);
             key.GetComponent<Rigidbody>().useGravity = true;
+
         }
     }
 
