@@ -93,16 +93,6 @@ public class PlayerManager : MonoBehaviourPun
 
     private void OnTriggerEnter(Collider other)
     {
-
-        //Ejemplo de collider
-        if (other.gameObject.name == "ArmarioInteractua" && photonView.IsMine) //nombre del objeto con el que interactuamos
-        {
-            interactableText.gameObject.SetActive(true);  //activamos el text del canvas principal
-            interactableText.text = "PALOMITAS!!!"; //mensaje que vamos a mostrar
-
-            StartCoroutine(WaitFor2Sec(playerCanvas)); // en este caso desactivamos el canvas tras mostrar el mensaje
-        }
-
         if (other.gameObject.name == "BookLock" && photonView.IsMine && GameManager.lock1CanBeSeen)
         {
             Cursor.lockState = CursorLockMode.None;

@@ -3411,10 +3411,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Brainfuck:
-
-
-    +++++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++++.>++++++++++++++++++++++++++++++++++++++++++++++++++.>+++++++++++++++++++++++++++++++++++++++++++++++++++++++.'
+  m_Text: "UVE\nI UVE\nI I \nUVE I I"
 --- !u!1 &2100306870978303419
 GameObject:
   m_ObjectHideFlags: 0
@@ -10397,7 +10394,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: fc107c0f7d76d42449eb96b3251ed82d, type: 3}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -10408,10 +10405,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Bienvenidos a Escape Madness! \n\nVuestra misi\xF3n ser\xE1 resolver los
-    puzzles colectivamente para poder escapar en el menor tiempo posible.\n\nLa comunicaci\xF3n
-    es clave para poder superar el juego ya que del otro compa\xF1ero depender\xE1
-    que tu puedas salir de las habitaciones.\n\nMucha suerte!"
+  m_Text: "No me di\xF3 tiempo a despertaros antes de huir del castillo tras la maldici\xF3n
+    que nos lanz\xF3 el gran brujo! S\xF3lo qued\xE1is vosotros dos, os hmos dejado
+    algunas indicaciones para que consig\xE1is salir, pero.. R\xC1PIDO! O la maldici\xF3n
+    acabar\xE1 con vosotros! \r\n\nDeber\xEDs comunicaros para encontrar todas las
+    pistas y conseguir escapar del castillo!\r\n\nUn aura m\xE1gica extra\xF1a presiento
+    cuando me acerco a las piedras... Me pregunto que orientaci\xF3n deben tener..."
 --- !u!1 &5072423784812893325
 GameObject:
   m_ObjectHideFlags: 0
