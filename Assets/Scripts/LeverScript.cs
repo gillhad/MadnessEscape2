@@ -27,6 +27,7 @@ public class LeverScript : MonoBehaviour
                 lever.transform.Rotate(-120f, 0, 0f);
                 up = true;
             }
+            GetComponent<AudioSource>().Play();
         }
     }
 }

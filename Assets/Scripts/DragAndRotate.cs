@@ -58,11 +58,13 @@ public class DragAndRotate : MonoBehaviourPun
          
          // store mouse
          _mouseReference = Input.mousePosition;
+         GetComponent<AudioSource>().Play();
      }
      
      void OnMouseUp()
      {
          // rotating flag
          _isRotating = false;
+         GetComponent<AudioSource>().Stop();
      }
 }

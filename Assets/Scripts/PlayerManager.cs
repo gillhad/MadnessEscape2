@@ -44,7 +44,8 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasPista32;
     public GameObject canvasTabla;
     public GameObject canvasArmarioElementos;
-    public GameObject HUD;
+    GameObject endCanvas;
+public GameObject HUD;
 
     bool drawerSolved = false;
 
@@ -76,6 +77,7 @@ public class PlayerManager : MonoBehaviourPun
         {
             canvasPista32.SetActive(true);
         }
+        endCanvas = GameObject.Find("EndGameMenu");
 
     }
     void Update()
@@ -120,7 +122,7 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OpenDoor(door);
         }
 
-        if (other.gameObject.name == "Valve_main")
+         if (other.gameObject.name == "Valve_main")
         {
             HUD.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
@@ -181,12 +183,12 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
             Candado.onTrigger = true;
-            
+
         }
         if (other.gameObject.name == "Paper_04" && photonView.IsMine)
         {
             Keypad.onTrigger = true;
-            
+
         }
 
 
@@ -256,7 +258,7 @@ public class PlayerManager : MonoBehaviourPun
             Cursor.visible = false;
             playerLockMenu.SetActive(false);
         }
-        if (other.gameObject.name == "Valve_main")
+         if (other.gameObject.name == "Valve_main")
         {
             HUD.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;
@@ -332,6 +334,10 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "The End")
         {
             ///mostrar canvas d final y gaurdar datos partida
+            endCanvas.SetActive(true);
+            Time.timeScale = 0;
+
+
         }
 
     }
