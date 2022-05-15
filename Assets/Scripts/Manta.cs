@@ -11,17 +11,19 @@ public class Manta : MonoBehaviour
 
     public GameObject sword;
     public GameObject cloth;
+    AudioSource audio;
 
     Collider baulCollider;
 
     void Start(){
         baulCollider = baul.GetComponent<BoxCollider>();
+        audio = GetComponent<AudioSource>();
     }
     void OnTriggerEnter(Collider other){
         if (other.gameObject.name =="sword_a")
         {
-            cloth.SetActive(false);
-            baulCollider.enabled = true;           
+            audio.Play();
+            StartCoroutine(WaitFor2Sec());      
         }
         
     }
@@ -29,4 +31,14 @@ public class Manta : MonoBehaviour
     void OnTriggerExit(Collider other){
 
     }
+
+    IEnumerator WaitFor2Sec()
+    {
+        yield return new WaitForSeconds(2);
+            cloth.SetActive(false);
+            baulCollider.enabled = true;   
+
+    }
 }
+
+

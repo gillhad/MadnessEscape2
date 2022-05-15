@@ -178,17 +178,11 @@ public class GameManager : MonoBehaviourPun
         //se comprobara siempre que se tenga que comprobar el estado de las palancas
         if (checkLever)
         {
-            Debug.Log("checkear lever");
-            Debug.Log($"1 {lever1.transform.localRotation.eulerAngles.x > 150}");
-            Debug.Log($"2 {lever2.transform.localRotation.eulerAngles.x > 150}");
-            Debug.Log($"3 {lever3.transform.localRotation.eulerAngles.x > 150}");
-            Debug.Log($"4 {lever4.transform.localRotation.eulerAngles.x > 150}");
             if (lever1up && !lever2up && !lever3up && lever4up)
             {
                 //se abre la puerta del closet y se pone checkLever a false para que no se vuelva a comprobar
                 OpenClosetDoor();
                 checkLever = false;
-                Debug.Log("hola");
             }
         }
 //---------------------
@@ -456,6 +450,7 @@ public class GameManager : MonoBehaviourPun
         }
         if (obj.Code == (uint)Events.ROTATE_ITEM)
         {
+            //  GameObject.Find("RockAudio").GetComponent<AudioSource>().Stop();
             Debug.Log(GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z);
             float data = (float)obj.CustomData;
             if (moveRock1)
@@ -489,6 +484,10 @@ public class GameManager : MonoBehaviourPun
                     break;
 
             }
+        }
+        if (obj.Code == (uint)Events.ROCK_SOUND){
+            Debug.Log("deberin sonar las piedras");
+        GameObject.Find("RockAudio").GetComponent<AudioSource>().Play();
         }
 
         if(obj.Code == (uint)Events.OPEN_WALL){       
@@ -545,7 +544,6 @@ public class GameManager : MonoBehaviourPun
 
     void PuzzleWater()
     {
-        Debug.Log("puzzl activado");
         ml3 = int.Parse(valueml3.text);
         ml5 = int.Parse(valueml5.text);
         ml8 = int.Parse(valueml8.text);

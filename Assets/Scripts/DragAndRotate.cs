@@ -55,10 +55,12 @@ public class DragAndRotate : MonoBehaviourPun
      {
          // rotating flag
          _isRotating = true;
+         PhotonNetwork.RaiseEvent((byte)Events.ROCK_SOUND, null, options, SendOptions.SendUnreliable);
          
          // store mouse
          _mouseReference = Input.mousePosition;
          GetComponent<AudioSource>().Play();
+         
      }
      
      void OnMouseUp()
@@ -66,5 +68,6 @@ public class DragAndRotate : MonoBehaviourPun
          // rotating flag
          _isRotating = false;
          GetComponent<AudioSource>().Stop();
+          
      }
 }

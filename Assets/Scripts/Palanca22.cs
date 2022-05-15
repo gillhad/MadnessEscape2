@@ -15,7 +15,7 @@ public class Palanca22 : MonoBehaviourPun
     private bool up;
 
     //inicializar la palanca hacia arriba
-    void Start()
+    void Awake()
     {
         up = true;
         lever.transform.Rotate(-60f, 0f, 0f);
@@ -55,15 +55,14 @@ public class Palanca22 : MonoBehaviourPun
                     Receivers = ReceiverGroup.All
                 };
                 PhotonNetwork.RaiseEvent((byte)Events.USE_GRAVITY_ON_SWORD, null, options, SendOptions.SendReliable);
-            }
-            // sword.GetComponent<Rigidbody>().useGravity = true;
-        }
-        else if (!up)
+            }else if (!up)
         {
-
             lever.transform.Rotate(-120f, 0, 0f);
             up = true;
         }
+            // sword.GetComponent<Rigidbody>().useGravity = true;
+        }
+        
     }
 }
 
