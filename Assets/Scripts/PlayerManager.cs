@@ -169,6 +169,7 @@ public class PlayerManager : MonoBehaviourPun
            canvasPista32.SetActive(true);
         }
 
+        if(gameManager.elementsPuzzleSolved){
         if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
         {
             Debug.Log("pantalla d pocions");
@@ -176,6 +177,7 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.potionCanvas.SetActive(true);
             Debug.Log("se ha abirto corrctamnte l canvas");
             
+        }
         }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
@@ -197,6 +199,10 @@ public class PlayerManager : MonoBehaviourPun
 
         if(other.gameObject.name == "TablaPer" && photonView.IsMine){
             canvasTabla.SetActive(true);
+        }
+
+        if(other.gameObject.name == "The End" ){
+            //todo final juego
         }
 
     }

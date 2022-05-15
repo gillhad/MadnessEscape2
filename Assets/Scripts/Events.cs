@@ -13,6 +13,9 @@ namespace MadnessEscape2.Assets.Scripts
         OPEN_CHEST2_ROOM_2 = 7,
         
         //
-        OPEN_WALL = 8,
+        OPEN_WALL = 30,
+        POTION_SOLVED = 31,
+        LIGHT_SOLVED = 32,
+        OPEN_FINAL_DOOR = 34,
     }
 }

@@ -238,9 +238,7 @@ public class GameManager : MonoBehaviourPun
             puzzleElementos();
         }
 
-       if(drawerCanvas.active){
-           puzzleBooks();
-       }
+       
 
        
 
@@ -485,27 +483,42 @@ public class GameManager : MonoBehaviourPun
 
             }
         }
-    }
-
-    void puzzleBooks(){
-        if(booksPuzzleSolved){    
-            Debug.Log("s ha solucionado");
+        if(obj.Code == (uint)Events.OPEN_WALL){
+             Debug.Log("s ha solucionado");
             FindObjectOfType<ControllerAnimations>().openWall();
                  var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
                 foreach (var item in buttons){
             item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
         }
-                drawerCanvas.SetActive(false);
+                
                 OnResume();
+        }
+        if(obj.Code == (uint)Events.OPEN_WALL){
+            potionReceived = true;
+        }
+        if(obj.Code == (uint)Events.LIGHT_SOLVED){
+            lightPuzzleSolved = true;
+        }
+        if(obj.Code == (uint)Events.OPEN_FINAL_DOOR){
+            if (lightPuzzleSolved && potionReceived)
+            {
+                printMessageOnScreen("Rápido, ya he abierto la puerta!");
+                openFinalDoor();
+            }
+            else if(!lightPuzzleSolved && potionReceived)
+            {
+                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
+            }
+            else if(lightPuzzleSolved && !potionReceived)
+            {
+                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
+            }
         }
     }
 
-     private void OpeanWallCheck(EventData obj){
-        if(obj.Code == (uint)Events.OPEN_CLOSET_ROOM_1_EVENT)
-        {
-            booksPuzzleSolved =  true;
-        }
-     }
+    
+
+     
 
     void PuzzleWater()
     {
@@ -521,6 +534,13 @@ public class GameManager : MonoBehaviourPun
             potionReceived = true;
             OnResume();
             StartCoroutine(WaitFor2Sec(potionCanvas));
+            RaiseEventOptions options = new RaiseEventOptions()
+                {
+                    CachingOption = EventCaching.DoNotCache,
+                    Receivers = ReceiverGroup.All
+                };
+                PhotonNetwork.RaiseEvent((byte)Events.POTION_SOLVED, null, options, SendOptions.SendReliable);
+                PhotonNetwork.RaiseEvent((byte)Events.OPEN_FINAL_DOOR, null, options, SendOptions.SendReliable);
         }
     }
 
@@ -535,33 +555,12 @@ public class GameManager : MonoBehaviourPun
             Debug.Log("recuperado");
             StartCoroutine(WaitFor2Sec(puzzleElementosCanvas));
             OnResume();
-            if (lightPuzzleSolved)
-            {
-                Debug.Log("s acabó");
-                printMessageOnScreen("Rápido, ya he abierto la puerta!");
-                openFinalDoor();
-            }
-            else
-            {
-                printMessageOnScreen("Necesito que activéis el mecanismo secreto de las luces!");
-            }
+            
         }
     }
 
     //Si solucionamos el puzzle de lucees lanza un mensaje
-    public void lightPuzzleSolution()
-    {
-        if (potionReceived)
-        {
-             Debug.Log("s acabó");
-            printMessageOnScreen("Rápido, ya he abierto la puerta!");
-            openFinalDoor();
-        }
-        else
-        {
-            printMessageOnScreen("Debéis conseguir la poción para que pueda abrir la puerta");
-        }
-    }
+    
 
     void openFinalDoor(){
         var doors = FindObjectsOfType<FinalDoorController>();

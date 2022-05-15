@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+using MadnessEscape2.Assets.Scripts;
+using ExitGames.Client.Photon;
 
 public class LightPuzzleController : MonoBehaviour
 {
@@ -38,7 +42,12 @@ public class LightPuzzleController : MonoBehaviour
                && light6.GetComponent<ParticleSystem>().isPlaying)
         {
             gameManager.lightPuzzleSolved = true;
-            gameManager.lightPuzzleSolution();
+             RaiseEventOptions options = new RaiseEventOptions()
+                {
+                    CachingOption = EventCaching.DoNotCache,
+                    Receivers = ReceiverGroup.All
+                };
+              PhotonNetwork.RaiseEvent((byte)Events.LIGHT_SOLVED, null, options, SendOptions.SendReliable);  
             Debug.Log("done");
         }
 

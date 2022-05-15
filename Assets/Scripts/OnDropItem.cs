@@ -88,8 +88,6 @@ public class OnDropItem : MonoBehaviour, IDropHandler
                     GameManager.ml8 = int.Parse(eventData.pointerDrag.GetComponentInChildren<Text>().text);
                 }
 
-            Debug.Log("prueba");
-            Debug.Log("en las botellas hay"+GameManager.ml3+ GameManager.ml5 + GameManager.ml8);
                
         }
     }

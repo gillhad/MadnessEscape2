@@ -60,6 +60,7 @@ public class BookManager : MonoBehaviourPun
                 Debug.Log("solved");
                 solved = true;
                 gameManager.booksPuzzleSolved = true;
+                gameManager.drawerCanvas.SetActive(false);
                 RaiseEventOptions options = new RaiseEventOptions()
                 {
                     CachingOption = EventCaching.DoNotCache,
@@ -68,8 +69,6 @@ public class BookManager : MonoBehaviourPun
                 PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);
                 
             }
-        }else{
-            FindObjectOfType<ControllerAnimations>().openWall();
         }
     }
 
