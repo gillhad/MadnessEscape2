@@ -9,9 +9,7 @@ public class Pause : MonoBehaviour
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
 
-    PlayfabManager pfm;
-
-    public Countdown cd;
+    
 
     
 
@@ -22,9 +20,7 @@ public class Pause : MonoBehaviour
 
          if (Input.GetKeyDown(KeyCode.Escape))
          {
-             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
-             pfm.SendLeaderboard(cd.minutes, cd.seconds);
-
+            
              if (GameIsPaused)
              {
                  Resume();

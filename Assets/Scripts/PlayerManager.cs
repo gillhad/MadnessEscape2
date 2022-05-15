@@ -11,6 +11,9 @@ using ExitGames.Client.Photon;
 
 public class PlayerManager : MonoBehaviourPun
 {
+    PlayfabManager pfm;
+
+    public Countdown cd;
     public PhotonView photonView;
     public GameObject playerCamera;
     private GameManager gameManager;
@@ -35,6 +38,7 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject PistaLetras;
 
     public GameObject PistaArmario;
+    public GameObject PistaJarrones;
 
     public GameObject Sueño;
     public GameObject canvasPista32;
@@ -154,6 +158,11 @@ public class PlayerManager : MonoBehaviourPun
         {
             Sueño.SetActive(true);
         }
+        if (other.gameObject.name == "Paperrr" && photonView.IsMine)
+        {
+            PistaJarrones.SetActive(true);
+        }
+
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
         {
             Candado.onTrigger = true;
@@ -210,6 +219,8 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "The End")
         {
             //todo final juego
+             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+             pfm.SendLeaderboard(cd.minutes, cd.seconds);
         }
 
     }
@@ -274,6 +285,10 @@ public class PlayerManager : MonoBehaviourPun
         if (other.gameObject.name == "TablaPer" && photonView.IsMine)
         {
             canvasTabla.SetActive(false);
+        }
+        if (other.gameObject.name == "Paperrr" && photonView.IsMine)
+        {
+            PistaJarrones.SetActive(false);
         }
 
         if (other.gameObject.name == "Treasure_Chest_Base_01" && photonView.IsMine)
