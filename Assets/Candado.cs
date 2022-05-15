@@ -6,15 +6,17 @@ public class Candado : MonoBehaviour
 {
     public string curPassword = "231";
     public string input;
-    public bool onTrigger = false;
+    public static bool onTrigger = false;
     public bool chestOpened;
     public bool keypadScreen;
     public Transform chestHinge;
 
+    public GameObject key;
+
 
     void OnTriggerEnter(Collider other)
     {
-        onTrigger = true;
+       // onTrigger = true;
     }
 
     void OnTriggerExit(Collider other)
@@ -22,6 +24,7 @@ public class Candado : MonoBehaviour
         onTrigger = false;
         keypadScreen = false;
         input = "";
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -36,6 +39,7 @@ public class Candado : MonoBehaviour
             Time.timeScale = 1f;
             var newRot = Quaternion.RotateTowards(chestHinge.rotation, Quaternion.Euler(-180.0f, 0.0f, 0.0f), Time.deltaTime * 250);
             chestHinge.rotation = newRot;
+            key.GetComponent<Rigidbody>().useGravity = true;
         }
     }
 

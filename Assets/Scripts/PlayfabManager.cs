@@ -41,14 +41,14 @@ public class PlayfabManager : MonoBehaviour
         Debug.Log(error.GenerateErrorReport());
     }
 
-    public void SendLeaderboard(int minutes, int seconds)
+    public void SendLeaderboard(float minutes, float seconds)
     {
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>{
                 new StatisticUpdate{
                     StatisticName = "Tiempo",
-                    Value = minutes + seconds
+                    Value = minutes + seconds/10
                 }
             }
         };

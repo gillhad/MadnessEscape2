@@ -20,20 +20,20 @@ public class Pause : MonoBehaviour
     void Update()
     {
 
-        // if (Input.GetKeyDown(KeyCode.Escape))
-        // {
-        //     pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
-        //     pfm.SendLeaderboard(cd.minutes, cd.seconds);
+         if (Input.GetKeyDown(KeyCode.Escape))
+         {
+             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+             pfm.SendLeaderboard(cd.minutes, cd.seconds);
 
-        //     if (GameIsPaused)
-        //     {
-        //         Resume();
-        //     }
-        //     else
-        //     {
-        //         Paused();
-        //     }
-        // }
+             if (GameIsPaused)
+             {
+                 Resume();
+             }
+             else
+             {
+                 Paused();
+             }
+         }
     }
 
     public void Resume()

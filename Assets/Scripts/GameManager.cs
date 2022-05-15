@@ -483,8 +483,10 @@ public class GameManager : MonoBehaviourPun
 
             }
         }
+
         if(obj.Code == (uint)Events.OPEN_WALL){
              Debug.Log("s ha solucionado");
+
             FindObjectOfType<ControllerAnimations>().openWall();
                  var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
                 foreach (var item in buttons){
