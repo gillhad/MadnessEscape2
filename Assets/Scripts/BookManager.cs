@@ -46,9 +46,7 @@ public class BookManager : MonoBehaviourPun
             {
                 if (books[i].GetComponent<RectTransform>().anchoredPosition == huecos[i].GetComponent<RectTransform>().anchoredPosition)
                 {
-                    Debug.Log("libro"+ i +"en hueco");
-                    Debug.Log(count);
-                    count++;
+                   count++;
                 }
                 else
                 {

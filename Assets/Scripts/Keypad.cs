@@ -10,7 +10,15 @@ public class Keypad : MonoBehaviour
     public static bool closetDown;
     public static bool keypadScreen;
     public Transform closetHinge;
+     GameObject audioObject;
+     AudioSource audio;
 
+     void Awake(){
+     }
+
+    void Start(){
+     audio = GetComponent<AudioSource>();   
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -29,10 +37,16 @@ public class Keypad : MonoBehaviour
     {
         if (input == curPassword)
         {
+            Debug.Log("se cae");
+            Time.timeScale = 1f;
             closetDown = true;
             keypadScreen = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;   
+            Debug.Log(audioObject);   
+            Debug.Log(audio);         
+             audio.Play();            
+
+            
         }
 
         if (closetDown)

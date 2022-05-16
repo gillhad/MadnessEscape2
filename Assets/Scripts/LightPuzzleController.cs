@@ -42,6 +42,8 @@ public class LightPuzzleController : MonoBehaviour
                && light6.GetComponent<ParticleSystem>().isPlaying)
         {
             gameManager.lightPuzzleSolved = true;
+            Debug.Log("se ha completado");
+            GetComponent<AudioSource>().Play();
              RaiseEventOptions options = new RaiseEventOptions()
                 {
                     CachingOption = EventCaching.DoNotCache,

@@ -33,7 +33,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light2.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
 
             }
 
@@ -52,7 +52,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light1.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
             if (light3.GetComponent<ParticleSystem>().isPlaying)
             {
@@ -61,7 +61,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light3.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -77,7 +77,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light2.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
             if (light4.GetComponent<ParticleSystem>().isPlaying)
             {
@@ -86,7 +86,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light4.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+               light2.GetComponent<AudioSource>().Play();
             }
         }
         if (this.gameObject.name == "btn4" && !lightPuzzleController.btnpress4)
@@ -101,7 +101,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light3.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
             if (light5.GetComponent<ParticleSystem>().isPlaying)
             {
@@ -110,7 +110,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light5.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
         }
 
@@ -126,7 +126,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light4.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
             if (light6.GetComponent<ParticleSystem>().isPlaying)
             {
@@ -135,7 +135,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light6.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
         }
         if (this.gameObject.name == "btn6" && !lightPuzzleController.btnpress6)
@@ -150,7 +150,7 @@ public class LightButtonController : MonoBehaviour
             else
             {
                 light5.GetComponent<ParticleSystem>().Play();
-                FindObjectOfType<LightPuzzleController>().GetComponent<AudioSource>().Play();
+                light2.GetComponent<AudioSource>().Play();
             }
         }
     }

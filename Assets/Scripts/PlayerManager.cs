@@ -44,8 +44,8 @@ public class PlayerManager : MonoBehaviourPun
     public GameObject canvasPista32;
     public GameObject canvasTabla;
     public GameObject canvasArmarioElementos;
-    GameObject endCanvas;
-public GameObject HUD;
+    static public bool endCanvas = false;
+    GameObject HUD;
 
     bool drawerSolved = false;
 
@@ -64,6 +64,8 @@ public GameObject HUD;
     private void Start()
     {
         HUD = GameObject.Find("HUD");
+        Debug.Log(HUD);
+        Debug.Log(endCanvas);
         if (gameManager == null)
         {
             gameManager = gameManager = FindObjectOfType<GameManager>();
@@ -81,7 +83,7 @@ public GameObject HUD;
 
     }
     void Update()
-    {
+    {        
 
         if (PhotonNetwork.InRoom && !photonView.IsMine)
         {
@@ -201,10 +203,10 @@ public GameObject HUD;
             canvasPista32.SetActive(true);
         }
 
-        if (potionUnlocked)
-        {
+        // if (potionUnlocked)
+        // {
             Debug.Log("va, abre las pociones");
-            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && potionUnlocked)
+            if (other.gameObject.name == "PapelPociones" && photonView.IsMine)
             {
                 Debug.Log("pantalla de pociones");
                 gameManager.OnPause();
@@ -213,7 +215,7 @@ public GameObject HUD;
                 Debug.Log("se ha abirto corrctamnte l canvas");
 
             }
-        }
+        // }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
         {
@@ -239,9 +241,14 @@ public GameObject HUD;
 
         if (other.gameObject.name == "The End")
         {
+           
             //todo final juego
-             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+            Debug.Log("final");
+             gameManager.OnPause();
+             endCanvas = true;
+              pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
              pfm.SendLeaderboard(cd.minutes, cd.seconds);
+             
         }
 
     }
@@ -332,14 +339,6 @@ public GameObject HUD;
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if (other.gameObject.name == "The End")
-        {
-            ///mostrar canvas d final y gaurdar datos partida
-            endCanvas.SetActive(true);
-            Time.timeScale = 0;
-
-
-        }
 
     }
 

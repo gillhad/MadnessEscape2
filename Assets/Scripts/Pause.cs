@@ -8,6 +8,7 @@ public class Pause : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
+    public GameObject endCanvas;
 
     
 
@@ -29,6 +30,10 @@ public class Pause : MonoBehaviour
              {
                  Paused();
              }
+         }
+
+         if(PlayerManager.endCanvas){
+             endCanvas.SetActive(true);
          }
     }
 
