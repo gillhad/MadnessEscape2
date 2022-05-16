@@ -6,6 +6,7 @@ public class SwordDistance : MonoBehaviour
 {
     GameObject player;
     public float pos;
+    bool drop = false;
     Vector3 startPos;
     void Start()
     {
@@ -37,9 +38,12 @@ public class SwordDistance : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision collision){
+    void OnCollisionEnter(Collision collision){        
             if(collision.gameObject.name == "Terrain"){
+                if(!drop)
                 this.GetComponent<AudioSource>().Play();
+                drop = true;
             }
+        
     }
 }

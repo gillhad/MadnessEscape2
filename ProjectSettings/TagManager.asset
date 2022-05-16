@@ -19,6 +19,7 @@ TagManager:
   - Puerta21
   - botonLlamas
   - DrawerCanvas
+  - EndMenu
   layers:
   - Default
   - TransparentFX

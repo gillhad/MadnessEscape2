@@ -16,7 +16,7 @@ public class OnDrag3D : MonoBehaviourPun
     GameObject player;
 
     public float distance;
-    public float maxDistance = 5f;
+    public float maxDistance = 3f;
 
 
 

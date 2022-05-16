@@ -77,7 +77,7 @@ public GameObject HUD;
         {
             canvasPista32.SetActive(true);
         }
-        endCanvas = GameObject.Find("EndGameMenu");
+        endCanvas = GameObject.FindGameObjectWithTag("EndMenu");
 
     }
     void Update()
@@ -208,6 +208,7 @@ public GameObject HUD;
             {
                 Debug.Log("pantalla de pociones");
                 gameManager.OnPause();
+                Cursor.visible = true;
                 gameManager.potionCanvas.SetActive(true);
                 Debug.Log("se ha abirto corrctamnte l canvas");
 
