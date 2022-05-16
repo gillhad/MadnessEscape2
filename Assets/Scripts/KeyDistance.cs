@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class KeyDistance : MonoBehaviour
 {
-
+    GameObject player;
 
     public float pos;
     Vector3 startPos;
 
-
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     void Awake()
     {
         startPos = this.transform.position;
@@ -17,6 +20,7 @@ public class KeyDistance : MonoBehaviour
 
     void Update()
     {
+        pos = Vector3.Distance(player.transform.position, transform.position);
 
         if (this.transform.position.z < 0.2 || this.transform.position.z > 13.5 ||
             this.transform.position.x < -0.5 || this.transform.position.x > 9.5 ||

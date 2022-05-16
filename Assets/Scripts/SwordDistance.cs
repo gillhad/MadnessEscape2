@@ -10,7 +10,7 @@ public class SwordDistance : MonoBehaviour
     Vector3 startPos;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+    player = GameObject.FindGameObjectWithTag("Player");
     }
 
     void Awake()
