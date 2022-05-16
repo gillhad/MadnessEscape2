@@ -207,7 +207,7 @@ public class PlayerManager : MonoBehaviourPun
         if (potionUnlocked)
         {
             Debug.Log("va, abre las pociones");
-            if (other.gameObject.name == "PapelPociones" && photonView.IsMine)
+            if (other.gameObject.name == "PapelPociones" && photonView.IsMine && !gameManager.potionReceived)
             {
                 Debug.Log("pantalla de pociones");
                 Cursor.lockState = CursorLockMode.None;
