@@ -56,13 +56,21 @@ public class MainMenuManager : MonoBehaviour
         menu.Close();
     }
 
-    public void OnLoadTest1() {
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void OnLoadTest1()
+    {
         SceneManager.LoadScene(2);
     }
-    public void OnLoadTest2() {
+    public void OnLoadTest2()
+    {
         SceneManager.LoadScene(3);
     }
-    public void OnLoadTest3() {
+    public void OnLoadTest3()
+    {
         SceneManager.LoadScene(4);
     }
 
