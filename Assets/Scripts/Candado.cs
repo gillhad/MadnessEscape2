@@ -13,7 +13,13 @@ public class Candado : MonoBehaviour
 
     public GameObject key;
 
+    AudioSource audio;
 
+
+
+    void Start(){
+        audio = GetComponent<AudioSource>();
+    }
     void OnTriggerEnter(Collider other)
     {
        // onTrigger = true;
@@ -26,6 +32,8 @@ public class Candado : MonoBehaviour
        // input = "";
        // Cursor.lockState = CursorLockMode.Locked;
     }
+
+    
 
     void Update()
     {
@@ -44,6 +52,7 @@ public class Candado : MonoBehaviour
             chestHinge.rotation = newRot;
             key.SetActive(true);
             key.GetComponent<Rigidbody>().useGravity = true;
+            audio.Play();
             
         }
     }
