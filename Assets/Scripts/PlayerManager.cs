@@ -211,7 +211,7 @@ public class PlayerManager : MonoBehaviourPun
             {
                 Debug.Log("pantalla de pociones");
                 Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 0f;
+                gameManager.OnPause();
                 Cursor.visible = true;
                 gameManager.potionCanvas.SetActive(true);
                 Debug.Log("se ha abirto corrctamnte l canvas");
@@ -246,8 +246,8 @@ public class PlayerManager : MonoBehaviourPun
 
             //todo final juego
             Debug.Log("final");
-            Time.timeScale = 0f;
             endCanvas = true;
+            Time.timeScale = 0f;
 
 
             pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
