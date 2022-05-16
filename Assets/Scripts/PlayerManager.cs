@@ -83,7 +83,7 @@ public class PlayerManager : MonoBehaviourPun
 
     }
     void Update()
-    {        
+    {
 
         if (PhotonNetwork.InRoom && !photonView.IsMine)
         {
@@ -91,7 +91,8 @@ public class PlayerManager : MonoBehaviourPun
             return;
         }
 
-        if(potionUnlocked){
+        if (potionUnlocked)
+        {
             Debug.Log("deberia abrirse las pociones");
         }
 
@@ -124,7 +125,7 @@ public class PlayerManager : MonoBehaviourPun
             gameManager.OpenDoor(door);
         }
 
-         if (other.gameObject.name == "Valve_main")
+        if (other.gameObject.name == "Valve_main")
         {
             HUD.SetActive(false);
             Cursor.lockState = CursorLockMode.None;
@@ -203,19 +204,20 @@ public class PlayerManager : MonoBehaviourPun
             canvasPista32.SetActive(true);
         }
 
-        // if (potionUnlocked)
-        // {
+        if (potionUnlocked)
+        {
             Debug.Log("va, abre las pociones");
             if (other.gameObject.name == "PapelPociones" && photonView.IsMine)
             {
                 Debug.Log("pantalla de pociones");
-                gameManager.OnPause();
-                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f;
+                //Cursor.visible = true;
                 gameManager.potionCanvas.SetActive(true);
                 Debug.Log("se ha abirto corrctamnte l canvas");
 
             }
-        // }
+        }
 
         if (other.gameObject.name == "ArmarioDesordenado" && photonView.IsMine && !drawerSolved)
         {
@@ -241,14 +243,16 @@ public class PlayerManager : MonoBehaviourPun
 
         if (other.gameObject.name == "The End")
         {
-           
+
             //todo final juego
             Debug.Log("final");
-             gameManager.OnPause();
-             endCanvas = true;
-              pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
-             pfm.SendLeaderboard(cd.minutes, cd.seconds);
-             
+            gameManager.OnPause();
+            endCanvas = true;
+
+
+            pfm = GameObject.FindGameObjectWithTag("escena").GetComponent<PlayfabManager>();
+            pfm.SendLeaderboard(cd.minutes, cd.seconds);
+
         }
 
     }
@@ -266,7 +270,7 @@ public class PlayerManager : MonoBehaviourPun
             Cursor.visible = false;
             playerLockMenu.SetActive(false);
         }
-         if (other.gameObject.name == "Valve_main")
+        if (other.gameObject.name == "Valve_main")
         {
             HUD.SetActive(true);
             Cursor.lockState = CursorLockMode.Locked;

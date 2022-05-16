@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Awake()
     {
-        
+
     }
 
     private void Start()
@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviourPun
             {
                 bluePotionCorrectPosition = true;
             }
-            if(greenPotionCorrectPosition && redPotionCorrectPosition && bluePotionCorrectPosition)
+            if (greenPotionCorrectPosition && redPotionCorrectPosition && bluePotionCorrectPosition)
             {
                 RaiseEventOptions options = new RaiseEventOptions()
                 {
@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviourPun
                 checkLever = false;
             }
         }
-//---------------------
+        //---------------------
         /*if (checkLeverMihai)
         {
             if (!lever5up)
@@ -194,9 +194,9 @@ public class GameManager : MonoBehaviourPun
                 checkLever = false;
             }
         }*/
-//-------------------------       
+        //-------------------------       
 
-        if(checkRock) checkRocks();
+        if (checkRock) checkRocks();
 
         //Si est� el men� de candado abierto revisa si se cumple el puzzle
         if (playerLockCanvas.active)
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviourPun
             playerHasMorningStar = true;
         }
 
-        
+
 
 
         //Si el canvas de pociones esta activo revisa que se solucione el problema
@@ -232,12 +232,13 @@ public class GameManager : MonoBehaviourPun
             PuzzleWater();
         }
 
-        if(potionReceived && lightPuzzleSolved){
+        if (potionReceived && lightPuzzleSolved)
+        {
             openFinalDoor();
         }
-       
 
-       
+
+
 
 
     }
@@ -316,7 +317,7 @@ public class GameManager : MonoBehaviourPun
 
     private void checkRocks()
     {
-        if(((GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z >= 175f && GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z <= 185f) || (GameObject.Find("stone_row_1").transform.rotation.z >= -5f && GameObject.Find("stone_row_1").transform.rotation.z <= 5f)) &&
+        if (((GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z >= 175f && GameObject.Find("stone_row_1").transform.rotation.eulerAngles.z <= 185f) || (GameObject.Find("stone_row_1").transform.rotation.z >= -5f && GameObject.Find("stone_row_1").transform.rotation.z <= 5f)) &&
            (GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z >= 175f && GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z <= 185f) || (GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z >= -5f && GameObject.Find("stone_row_2").transform.rotation.eulerAngles.z <= 5f) &&
            (GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z >= 175f && GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z <= 185f) || (GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z >= -5f && GameObject.Find("stone_row_3").transform.rotation.eulerAngles.z <= 5f))
         {
@@ -485,62 +486,71 @@ public class GameManager : MonoBehaviourPun
 
             }
         }
-        if (obj.Code == (uint)Events.ROCK_SOUND){
+        if (obj.Code == (uint)Events.ROCK_SOUND)
+        {
             Debug.Log("deberin sonar las piedras");
-        GameObject.Find("RockAudio").GetComponent<AudioSource>().Play();
+            GameObject.Find("RockAudio").GetComponent<AudioSource>().Play();
         }
 
-        if(obj.Code == (uint)Events.OPEN_WALL){       
-                    
+        if (obj.Code == (uint)Events.OPEN_WALL)
+        {
+
             FindObjectOfType<ControllerAnimations>().openWall();
-                
+
         }
 
-        if(obj.Code == (uint)Events.ELEMENT_SOLVED){       
-                    
-           PlayerManager.potionUnlocked = true;           
+        if (obj.Code == (uint)Events.ELEMENT_SOLVED)
+        {
+
+            PlayerManager.potionUnlocked = true;
         }
-        
-        if(obj.Code == (uint)Events.LIGHT_SOLVED){
+
+        if (obj.Code == (uint)Events.LIGHT_SOLVED)
+        {
             lightPuzzleSolved = true;
         }
-        if(obj.Code == (uint)Events.POTION_SOLVED){
+        if (obj.Code == (uint)Events.POTION_SOLVED)
+        {
             potionReceived = true;
         }
 
-        if(obj.Code == (uint)Events.OPEN_FINAL_DOOR){
+        if (obj.Code == (uint)Events.OPEN_FINAL_DOOR)
+        {
             if (lightPuzzleSolved && potionReceived)
             {
                 openFinalDoor();
             }
-            else if(!lightPuzzleSolved && potionReceived)
+            else if (!lightPuzzleSolved && potionReceived)
             {
             }
-            else if(lightPuzzleSolved && !potionReceived)
+            else if (lightPuzzleSolved && !potionReceived)
             {
             }
         }
     }
 
-    public void bookSolved(){
-                booksPuzzleSolved = true;  
-                    if(GameObject.Find("CanvasArmario").active){ 
-                        OnResume();
-                    GameObject.Find("CanvasArmario").SetActive(false);  
-                    }             
-                 var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
-                foreach (var item in buttons){
-            item.transform.position = new Vector3(item.transform.position.x,item.transform.position.y+0.1f,item.transform.position.z);
-        }             
-                RaiseEventOptions options = new RaiseEventOptions()
-                {
-                    CachingOption = EventCaching.DoNotCache,
-                    Receivers = ReceiverGroup.All
-                };
-                PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);            
+    public void bookSolved()
+    {
+        booksPuzzleSolved = true;
+        if (GameObject.Find("CanvasArmario").active)
+        {
+            OnResume();
+            GameObject.Find("CanvasArmario").SetActive(false);
+        }
+        var buttons = GameObject.FindGameObjectsWithTag("botonLlamas");
+        foreach (var item in buttons)
+        {
+            item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + 0.1f, item.transform.position.z);
+        }
+        RaiseEventOptions options = new RaiseEventOptions()
+        {
+            CachingOption = EventCaching.DoNotCache,
+            Receivers = ReceiverGroup.All
+        };
+        PhotonNetwork.RaiseEvent((byte)Events.OPEN_WALL, null, options, SendOptions.SendReliable);
     }
 
-     
+
 
     void PuzzleWater()
     {
@@ -553,20 +563,21 @@ public class GameManager : MonoBehaviourPun
             //puzzle conseguido
             Debug.Log("conseguido");
             potionReceived = true;
-            OnResume();
             StartCoroutine(WaitFor2Sec(potionCanvas));
+            OnResume();
             RaiseEventOptions options = new RaiseEventOptions()
-                {
-                    CachingOption = EventCaching.DoNotCache,
-                    Receivers = ReceiverGroup.All
-                };
-                PhotonNetwork.RaiseEvent((byte)Events.POTION_SOLVED, null, options, SendOptions.SendReliable);
-                PhotonNetwork.RaiseEvent((byte)Events.OPEN_FINAL_DOOR, null, options, SendOptions.SendReliable);
+            {
+                CachingOption = EventCaching.DoNotCache,
+                Receivers = ReceiverGroup.All
+            };
+            PhotonNetwork.RaiseEvent((byte)Events.POTION_SOLVED, null, options, SendOptions.SendReliable);
+            PhotonNetwork.RaiseEvent((byte)Events.OPEN_FINAL_DOOR, null, options, SendOptions.SendReliable);
         }
     }
 
-    
-    void openFinalDoor(){
+
+    void openFinalDoor()
+    {
         var doors = FindObjectsOfType<FinalDoorController>();
         Debug.Log(doors.Length);
         foreach (var item in doors)
