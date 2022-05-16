@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviourPun
     private void Start()
     {
         GameObject.Find("stone_row_1").transform.Rotate(0f, 0f, 47f);
-        GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360));
+       // GameObject.Find("stone_row_2").transform.Rotate(0f, 0f, Random.Range(0, 360));
         GameObject.Find("stone_row_3").transform.Rotate(0f, 0f, Random.Range(0, 360));
         lever1 = GameObject.Find("Lever1").transform.GetChild(1).gameObject;
         lever2 = GameObject.Find("Lever2").transform.GetChild(1).gameObject;
