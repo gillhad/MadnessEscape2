@@ -7,7 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public PhotonView photonView;
-    public float speed = 0.15f;
+    static public float speed = 0.15f;
+    public float gravity = -9.18f;
+
+    Vector3 velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,10 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = transform.right * (x * speed) + transform.forward *( z * speed);
 
         controller.Move(move);
+
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 
 

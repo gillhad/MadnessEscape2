@@ -5,11 +5,26 @@ TagManager:
   serializedVersion: 2
   tags:
   - Interactable
+  - Door
+  - Draggable
+  - CanvasElemento
+  - escena
+  - Potioncanvas
+  - ventanaA
+  - EspadaA
+  - VentanaClave
+  - Piedra
+  - EspadaB
+  - PistaArmario22
+  - Puerta21
+  - botonLlamas
+  - DrawerCanvas
+  - EndMenu
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

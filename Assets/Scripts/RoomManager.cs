@@ -16,17 +16,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
             sharedInstance = this;
             DontDestroyOnLoad(sharedInstance);
         }
-        else {
+        else
+        {
             Destroy(gameObject);
         }
     }
 
-    private void OnEnable()
+    public override void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+    public override void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
@@ -36,21 +37,33 @@ public class RoomManager : MonoBehaviourPunCallbacks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+
         Vector3 spawnPosition1 = new Vector3(4f, 2f, 4f);
-        Vector3 spawnPosition2 = new Vector3(30f, 2f, 30f);
+        Vector3 spawnPosition2 = new Vector3(8f, 2f, 25f);
+        Vector3 spawnRoom3 = new Vector3(27f, 2f, 10f);
+        Vector3 spawnRoom2 = new Vector3(18f, 2f, 10f);
+        Vector3 spawnRoom22 = new Vector3(20f, 2f, 20f);
+        Vector3 spawnRoom32 = new Vector3(27f, 2f, 25f);
+        Vector3[] positions = new[] { spawnPosition1, spawnPosition2 };
 
         if (PhotonNetwork.InRoom)
         {
-            if (PhotonNetwork.PlayerList.Length==1)
+
+            if (PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition1, Quaternion.identity);
+                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom3, Quaternion.identity);
             }
-            else {
-                PhotonNetwork.Instantiate("FPSPlayer", spawnPosition2, Quaternion.identity);
+            else
+            {
+                PhotonNetwork.Instantiate("FPSPlayer", spawnRoom32, Quaternion.identity);
+
+
+
+
+
             }
-            
         }
-        
     }
 }
