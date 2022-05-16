@@ -20,11 +20,11 @@ public class LeverScript : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             if(up){
-                lever.transform.Rotate(120f, 0, 0f);
+                lever.transform.Rotate(60f, 0, 0f);
                 up = false;
             }else if(!up)
             {
-                lever.transform.Rotate(-120f, 0, 0f);
+                lever.transform.Rotate(-60f, 0, 0f);
                 up = true;
             }
             GetComponent<AudioSource>().Play();

@@ -37,6 +37,8 @@ public class Palanca22 : MonoBehaviourPun
         if (obj.Code == (uint)Events.USE_GRAVITY_ON_SWORD)
         {
             sword.GetComponent<Rigidbody>().useGravity = true;
+            sword.GetComponent<OnDrag3D>().enabled = true;
+            sword.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
@@ -55,14 +57,15 @@ public class Palanca22 : MonoBehaviourPun
                     Receivers = ReceiverGroup.All
                 };
                 PhotonNetwork.RaiseEvent((byte)Events.USE_GRAVITY_ON_SWORD, null, options, SendOptions.SendReliable);
-            }else if (!up)
-        {
-            lever.transform.Rotate(-120f, 0, 0f);
-            up = true;
-        }
+            }
+            else if (!up)
+            {
+                lever.transform.Rotate(-120f, 0, 0f);
+                up = true;
+            }
             // sword.GetComponent<Rigidbody>().useGravity = true;
         }
-        
+
     }
 }
 

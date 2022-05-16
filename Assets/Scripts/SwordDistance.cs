@@ -29,21 +29,25 @@ public class SwordDistance : MonoBehaviour
             if (this.transform.position.z < 5.5 || this.transform.position.z > 13.5 ||
                 this.transform.position.x < 14.5 || this.transform.position.x > 19 ||
                 this.transform.position.y < 0 || this.transform.position.y > 4)
-            {
-                this.transform.position = startPos;
-            }
+
+                if (this.transform.position.x > 4.4 && this.transform.position.z < 5.5)
+                {
+                    this.transform.position = startPos;
+                }
         {
-            
+
         }
 
     }
 
-    void OnCollisionEnter(Collision collision){        
-            if(collision.gameObject.name == "Terrain"){
-                if(!drop)
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Terrain")
+        {
+            if (!drop)
                 this.GetComponent<AudioSource>().Play();
-                drop = true;
-            }
-        
+            // drop = true;
+        }
+
     }
 }
